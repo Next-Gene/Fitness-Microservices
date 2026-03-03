@@ -2,9 +2,9 @@ name: .NET Microservices CI/CD
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches: [ "Master", "main" ]
   pull_request:
-    branches: [ "master", "main" ]
+    branches: [ "Master", "main" ]
 
 jobs:
   build-and-push:
