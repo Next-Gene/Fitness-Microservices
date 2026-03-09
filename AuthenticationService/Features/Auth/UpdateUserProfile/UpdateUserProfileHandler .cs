@@ -5,24 +5,30 @@ using AuthenticationService.Models;
 
 namespace AuthenticationService.Features.Auth.UpdateUserProfile
 {
-    public class UpdateUserProfileHandler : IRequestHandler<UpdateUserProfileCommand, UpdateUserProfileResponse>
+    public class UpdateUserProfileHandler
+        : IRequestHandler<UpdateUserProfileCommand, UpdateUserProfileResponse>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
 
-        public UpdateUserProfileHandler(UserManager<ApplicationUser> userManager, ITokenService tokenService)
+        public UpdateUserProfileHandler(
+            UserManager<ApplicationUser> userManager,
+            ITokenService tokenService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
         }
 
-        public async Task<UpdateUserProfileResponse> Handle(UpdateUserProfileCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateUserProfileResponse> Handle(
+            UpdateUserProfileCommand request,
+            CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(request.UserId.ToString());
-            if (user == null)
-                throw new KeyNotFoundException("User not found.");
 
-            // ✅ Update user fields if provided
+            if (user is null)
+                throw new KeyNotFoundException("User not found");
+
+            // Update basic info
             if (!string.IsNullOrWhiteSpace(request.FirstName))
                 user.FirstName = request.FirstName;
 
@@ -35,19 +41,32 @@ namespace AuthenticationService.Features.Auth.UpdateUserProfile
             if (!string.IsNullOrWhiteSpace(request.ProfileImage))
                 user.ProfileImageUrl = request.ProfileImage;
 
+            // Update fitness data
+            if (request.Goal is not null)
+                user.Goal = request.Goal;
+
+            if (request.activtyLevel is not null)
+                user.ActivtyLevel = request.activtyLevel;
+
+            if (request.Height > 0)
+                user.Height = request.Height;
+
+            if (request.Weight > 0)
+                user.Weight = request.Weight;
+
             user.FullName = $"{user.FirstName} {user.LastName}";
 
             var updateResult = await _userManager.UpdateAsync(user);
+
             if (!updateResult.Succeeded)
             {
                 var errors = string.Join("; ", updateResult.Errors.Select(e => e.Description));
                 throw new InvalidOperationException($"Failed to update profile: {errors}");
             }
 
-            // ✅ Generate new tokens after profile update
-            // ✅ Generate new tokens after profile update
+            // Generate tokens
             var roles = await _userManager.GetRolesAsync(user);
-            var tokens = await _tokenService.GenerateTokensAsync(user, false); // false = no rememberMe
+            var tokens = await _tokenService.GenerateTokensAsync(user, false);
 
             return new UpdateUserProfileResponse
             {
