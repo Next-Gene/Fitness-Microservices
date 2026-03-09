@@ -5,6 +5,7 @@ using AuthenticationService.Models;
 using AuthenticationService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Online_Exam_System.Data;
 
 namespace AuthenticationService.Features.Auth.Register
 {
