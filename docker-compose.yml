@@ -14,6 +14,12 @@ services:
       - "1433:1433"
     volumes:
       - sql_data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "MyComplexP@ssw0rd2025" -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
   # ==========================================
   # 2. Message Broker (RabbitMQ)
@@ -26,11 +32,20 @@ services:
       - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
 
   # ==========================================
   # 3. Workout Service
   # ==========================================
   workoutservice:
+    build:
+      context: .
+      dockerfile: WorkoutService/Dockerfile
     image: amr0101/workout-service:latest
     ports:
       - "8080:8080"
@@ -38,46 +53,78 @@ services:
     environment:
       - RabbitMq:Host=rabbitmq
     depends_on:
-      - sqlserver
-      - rabbitmq
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   # ==========================================
   # 4. Nutrition Service
   # ==========================================
   nutritionservice:
+    build:
+      context: .
+      dockerfile: NutritionService/Dockerfile
     image: amr0101/nutrition-service:latest
     ports:
       - "8082:8080"
       - "8083:8081"
     depends_on:
-      - sqlserver
+      sqlserver:
+        condition: service_healthy
 
   # ==========================================
   # 5. Fitness Calculation Service
   # ==========================================
   fitnesscalculationservice:
+    build:
+      context: .
+      dockerfile: FitnessCalculationService/Dockerfile
     image: amr0101/fitness-calc-service:latest
     ports:
       - "8084:8080"
       - "8085:8081"
     depends_on:
-      - sqlserver
+      sqlserver:
+        condition: service_healthy
 
   # ==========================================
   # 6. Progress Tracking Service
   # ==========================================
   progresstrackingservice:
+    build:
+      context: .
+      dockerfile: ProgressTrackingService/Dockerfile
     image: amr0101/progress-service:latest
     ports:
       - "8086:8080"
       - "8087:8081"
     depends_on:
-      - sqlserver
+      sqlserver:
+        condition: service_healthy
 
   # ==========================================
-  # 7. API Gateway
+  # 7. Authentication Service
+  # ==========================================
+  authenticationservice:
+    build:
+      context: .
+      dockerfile: AuthenticationService/Dockerfile
+    image: amr0101/auth-service:latest
+    ports:
+      - "8090:8080"
+      - "8091:8081"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+  # ==========================================
+  # 8. API Gateway
   # ==========================================
   fitnessapigateway:
+    build:
+      context: .
+      dockerfile: FitnessAPIGateway/Dockerfile
     image: amr0101/gateway-service:latest
     ports:
       - "8088:8080"
@@ -88,26 +135,16 @@ services:
       - authenticationservice
 
   # ==========================================
-  # 8. Authentication Service
-  # ==========================================
-  authenticationservice:
-    image: amr0101/auth-service:latest
-    ports:
-      - "8090:8080"
-      - "8091:8081"
-    depends_on:
-      - sqlserver
-
-  # ==========================================
   # 9. Smart Coach Service
   # ==========================================
   smartcoachservice:
+    build:
+      context: .
+      dockerfile: SmartCoachService/Dockerfile
     image: amr0101/smart-coach-service:latest
     ports:
       - "8094:8080"
       - "8095:8081"
-    depends_on:
-      - sqlserver
 
 volumes:
   sql_data:
