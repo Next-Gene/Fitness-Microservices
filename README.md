@@ -66,4 +66,4 @@ The **Fitness API Gateway** is the public-facing entry point for the entire syst
 -   **Service Boundaries:** Each service should be responsible for a single, well-defined domain. Avoid creating dependencies between services where possible.
 -   **Communication:** Services should communicate asynchronously where possible (e.g., using a message broker). For synchronous communication, use lightweight protocols like REST.
 -   **Code Style:** Follow the established coding conventions and patterns within each service.
--   **Testing:** Each service should have its own set of unit and integration tests.
+-   **Testing:** Each service should have its own set of unit and integration tests...
