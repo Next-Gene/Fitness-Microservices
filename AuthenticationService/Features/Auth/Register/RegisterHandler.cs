@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using AuthenticationService.Contarcts;
 using AuthenticationService.Models;
+using AuthenticationService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Online_Exam_System.Data;
 
 namespace AuthenticationService.Features.Auth.Register
 {
@@ -13,14 +15,14 @@ namespace AuthenticationService.Features.Auth.Register
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly ITokenService _tokenService;
         private readonly IMemoryCache _cache;
-        private readonly DbContext _db; // Inject your Identity DbContext
+        private readonly SuperFitnessAppAuthContext _db;
 
         public RegisterHandler(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole<Guid>> roleManager,
             ITokenService tokenService,
             IMemoryCache cache,
-            DbContext dbContext // pass your ApplicationDbContext
+            SuperFitnessAppAuthContext dbContext
         )
         {
             _userManager = userManager;

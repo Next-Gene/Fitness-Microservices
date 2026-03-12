@@ -1,8 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using AuthenticationService.Features.Auth.ChangePassword;
+﻿using AuthenticationService.Features.Auth.ChangePassword;
 using AuthenticationService.Features.Auth.ForgetPassword.OTP;
 using AuthenticationService.Features.Auth.ForgetPassword.ResetPassword;
 using AuthenticationService.Features.Auth.GetCurrentUser;
@@ -10,6 +6,11 @@ using AuthenticationService.Features.Auth.Login;
 using AuthenticationService.Features.Auth.Logout;
 using AuthenticationService.Features.Auth.Register;
 using AuthenticationService.Features.Auth.UpdateUserProfile;
+using AuthenticationService.Features.Auth.UpdateUserProfile.AuthenticationService.Features.Auth.UpdateUserProfile;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationService.Features.Auth
 {
@@ -19,11 +20,9 @@ namespace AuthenticationService.Features.Auth
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly UpdateUserProfileOrchestrator _updateUserProfileOrchestrator;  
-        public AuthController(IMediator mediator , UpdateUserProfileOrchestrator updateUserProfileOrchestrator) { 
+        public AuthController(IMediator mediator ) { 
         
             _mediator = mediator;
-            _updateUserProfileOrchestrator = updateUserProfileOrchestrator;
 
 
         }
@@ -73,13 +72,23 @@ namespace AuthenticationService.Features.Auth
         public async Task<IActionResult> UpdateProfile([FromForm] UpdateUserProfileRequest request)
         {
             var userId = User.FindFirst("id")?.Value;
+
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized(new { statusCode = 401, message = "Invalid token or not authenticated." });
 
-            var response = await _updateUserProfileOrchestrator.UpdateUserProfileAsync(
+            var orchestratorRequest = new UpdateUserProfileOrchestratorRequest(
                 Guid.Parse(userId),
-                request
+                request.FirstName,
+                request.LastName,
+                request.PhoneNumber,
+                request.Goal,
+                request.activtyLevel,
+                request.Weight,
+                request.Height,
+                request.ProfileImage
             );
+
+            var response = await _mediator.Send(orchestratorRequest);
 
             return Ok(response);
         }

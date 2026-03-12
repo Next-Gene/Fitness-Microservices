@@ -73,7 +73,7 @@ namespace NutritionService
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection(); // Disabled: no HTTPS cert in Docker
 
             // ✅ 4. Use CORS before Authorization
             app.UseCors("AllowAll");

@@ -145,7 +145,7 @@ namespace AuthenticationService
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection(); // Disabled: no HTTPS cert in Docker
             
             app.UseCors("AllowAll"); // CORS first
             

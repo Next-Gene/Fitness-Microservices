@@ -57,7 +57,7 @@ builder.Services.AddOcelot(builder.Configuration);
 var app = builder.Build();
 
 // 4. Configure Middleware Pipeline
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Disabled: no HTTPS cert in Docker
 
 app.UseAuthentication();
 app.UseAuthorization();

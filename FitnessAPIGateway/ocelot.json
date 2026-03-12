@@ -1,5 +1,9 @@
 {
   "Routes": [
+    // ==========================================
+    // 1. Authentication Service (api/auth/*)
+    //    Internal: api/auth/* ✅ Already correct
+    // ==========================================
     {
       "DownstreamPathTemplate": "/api/auth/{everything}",
       "DownstreamScheme": "http",
@@ -10,7 +14,41 @@
         }
       ],
       "UpstreamPathTemplate": "/api/auth/{everything}",
-      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "UpstreamHttpMethod": [
+        "POST",
+        "GET",
+        "PUT"
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      }
+    },
+    // ==========================================
+    // 2. Workout Service — v1 endpoints
+    //    Internal: /api/v1/workouts/*
+    //    Gateway:  /api/workouts/*
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/api/v1/workouts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "workoutservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/workouts",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -20,7 +58,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/workouts/{everything}",
+      "DownstreamPathTemplate": "/api/v1/workouts/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -29,7 +67,71 @@
         }
       ],
       "UpstreamPathTemplate": "/api/workouts/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      }
+    },
+    // ==========================================
+    // 2b. Workout Service — Create Workout
+    //     Internal: POST /workouts
+    //     Gateway:  POST /api/workouts/create
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/workouts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "workoutservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/workouts/create",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      }
+    },
+    // ==========================================
+    // 2c. Workout Service — Workout Plans
+    //     Internal: /workout-plans, /workout-plans/{id},
+    //               /workout-plans/{planId}/assign-to/{workoutId}
+    //     Gateway:  /api/workout-plans/*
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/workout-plans",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "workoutservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/workout-plans",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -43,7 +145,38 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/nutrition/{everything}",
+      "DownstreamPathTemplate": "/workout-plans/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "workoutservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/workout-plans/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      }
+    },
+    // ==========================================
+    // 3. Nutrition Service
+    //    Internal: /api/v1/nutrition/*
+    //    Gateway:  /api/nutrition/*
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/api/v1/nutrition/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -52,7 +185,42 @@
         }
       ],
       "UpstreamPathTemplate": "/api/nutrition/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      }
+    },
+    // ==========================================
+    // 4. Progress Tracking Service
+    //    Internal: /api/v1/progress, /api/v1/progress/*
+    //    Gateway:  /api/progress, /api/progress/*
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/api/v1/progress",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "progresstrackingservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/progress",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -66,7 +234,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/progress/{everything}",
+      "DownstreamPathTemplate": "/api/v1/progress/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -75,7 +243,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/progress/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -88,8 +261,13 @@
         "Limit": 100
       }
     },
+    // ==========================================
+    // 5. Fitness Calculation Service
+    //    Internal: /api/wga, /api/wga/{userId}
+    //    Gateway:  /api/fitness-calculator, /api/fitness-calculator/{userId}
+    // ==========================================
     {
-      "DownstreamPathTemplate": "/api/fitness-calculator/{everything}",
+      "DownstreamPathTemplate": "/api/wga",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -97,8 +275,10 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/fitness-calculator/{everything}",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/api/fitness-calculator",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -112,7 +292,37 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/smart-coach/{everything}",
+      "DownstreamPathTemplate": "/api/wga/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "fitnesscalculationservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/fitness-calculator/{everything}",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 50
+      }
+    },
+    // ==========================================
+    // 6. Smart Coach Service
+    //    Internal: POST /api/ask
+    //    Gateway:  POST /api/smart-coach
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/api/ask",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -120,8 +330,10 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/smart-coach/{everything}",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/api/smart-coach",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
