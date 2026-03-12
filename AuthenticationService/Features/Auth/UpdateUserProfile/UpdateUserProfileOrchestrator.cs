@@ -1,49 +1,64 @@
 ﻿using MediatR;
 using AuthenticationService.Contarcts;
+using AuthenticationService.Features.Auth.UpdateUserProfile.AuthenticationService.Features.Auth.UpdateUserProfile;
 
 namespace AuthenticationService.Features.Auth.UpdateUserProfile
 {
     public class UpdateUserProfileOrchestrator
+        : IRequestHandler<UpdateUserProfileOrchestratorRequest, UpdateUserProfileResponse>
     {
         private readonly IMediator _mediator;
         private readonly IImageHelper _imageHelper;
 
-        public UpdateUserProfileOrchestrator(IMediator mediator, IImageHelper imageHelper)
+        public UpdateUserProfileOrchestrator(
+            IMediator mediator,
+            IImageHelper imageHelper)
         {
             _mediator = mediator;
             _imageHelper = imageHelper;
         }
 
-        public async Task<UpdateUserProfileResponse> UpdateUserProfileAsync(Guid userId, UpdateUserProfileRequest request, string? currentImageUrl = null)
+        public async Task<UpdateUserProfileResponse> Handle(
+            UpdateUserProfileOrchestratorRequest request,
+            CancellationToken cancellationToken)
         {
-            string? imageUrl = currentImageUrl;
+            string? imagePath = null;
 
-            if (request.ProfileImage is not null && request.ProfileImage.Length > 0)
+            // 1️⃣ Upload Image
+            if (request.ProfileImage is not null)
             {
-                // Delete old image if exists
-                if (!string.IsNullOrEmpty(currentImageUrl))
-                {
-                    _imageHelper.DeleteImage(currentImageUrl);
-                }
-
-                // Save new image
-                imageUrl = await _imageHelper.SaveImageAsync(request.ProfileImage, "Users");
+                imagePath = await _imageHelper.SaveImageAsync(
+                    request.ProfileImage,
+                    "Users"
+                );
             }
 
+            // 2️⃣ Create Command
             var command = new UpdateUserProfileCommand(
-                userId,
+                request.UserId,
                 request.FirstName,
                 request.LastName,
                 request.PhoneNumber,
-                imageUrl,             // ProfileImage
-                request.Goal,         // Goal
-                request.activtyLevel, // activtyLevel
-                request.Height,       // Height
-                request.Weight        // Weight
+                imagePath,
+                request.Goal,
+                request.activtyLevel,
+                request.Height,
+                request.Weight
             );
 
+            // 3️⃣ Send Command to Handler
+            var result = await _mediator.Send(command, cancellationToken);
 
-            return await _mediator.Send(command);
+            // 4️⃣ Convert image path to full URL
+            if (!string.IsNullOrEmpty(result.ProfileImageUrl))
+            {
+                result = result with
+                {
+                    ProfileImageUrl = _imageHelper.GetImageUrl(result.ProfileImageUrl)
+                };
+            }
+
+            return result;
         }
     }
 }
