@@ -28,6 +28,36 @@
       }
     },
     // ==========================================
+    // 2b. Workout Service — Create Workout
+    //     Internal: POST /workouts
+    //     Gateway:  POST /api/workouts/create
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/workouts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "workoutservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/workouts/create",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      }
+    },
+    // ==========================================
     // 2. Workout Service — v1 endpoints
     //    Internal: /api/v1/workouts/*
     //    Gateway:  /api/workouts/*
@@ -69,36 +99,6 @@
       "UpstreamPathTemplate": "/api/workouts/{everything}",
       "UpstreamHttpMethod": [
         "GET",
-        "POST"
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "1m",
-        "PeriodTimespan": 60,
-        "Limit": 100
-      }
-    },
-    // ==========================================
-    // 2b. Workout Service — Create Workout
-    //     Internal: POST /workouts
-    //     Gateway:  POST /api/workouts/create
-    // ==========================================
-    {
-      "DownstreamPathTemplate": "/workouts",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "workoutservice",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/api/workouts/create",
-      "UpstreamHttpMethod": [
         "POST"
       ],
       "AuthenticationOptions": {
