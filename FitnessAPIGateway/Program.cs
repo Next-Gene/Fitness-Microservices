@@ -8,8 +8,21 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Load Ocelot Configuration
-// This loads the routes from ocelot.json. 'optional: false' means app will crash if file is missing.
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+
+// ---------------------------------------------------------
+// ✅ CORS Configuration
+// ---------------------------------------------------------
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200", "http://localhost:4201")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 
 // ---------------------------------------------------------
 // ✅ 1. Register HttpClient with SSL Bypass (Development Only)
@@ -59,6 +72,7 @@ var app = builder.Build();
 // 4. Configure Middleware Pipeline
 // app.UseHttpsRedirection(); // Disabled: no HTTPS cert in Docker
 
+app.UseCors("AllowAngular");
 app.UseAuthentication();
 app.UseAuthorization();
 

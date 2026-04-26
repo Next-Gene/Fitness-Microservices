@@ -48,7 +48,7 @@ services:
     build:
       context: .
       dockerfile: WorkoutService/Dockerfile
-    image: amr0101/workout-service:latest
+    image: seifemam/workout-service:latest
     # No external ports — only reachable via API Gateway
     expose:
       - "8080"
@@ -67,7 +67,7 @@ services:
     build:
       context: .
       dockerfile: NutritionService/Dockerfile
-    image: amr0101/nutrition-service:latest
+    image: seifemam/nutrition-service:latest
     expose:
       - "8080"
     depends_on:
@@ -81,7 +81,7 @@ services:
     build:
       context: .
       dockerfile: FitnessCalculationService/Dockerfile
-    image: amr0101/fitness-calc-service:latest
+    image: seifemam/fitness-calc-service:latest
     expose:
       - "8080"
     depends_on:
@@ -95,7 +95,7 @@ services:
     build:
       context: .
       dockerfile: ProgressTrackingService/Dockerfile
-    image: amr0101/progress-service:latest
+    image: seifemam/progress-service:latest
     expose:
       - "8080"
     depends_on:
@@ -109,7 +109,7 @@ services:
     build:
       context: .
       dockerfile: AuthenticationService/Dockerfile
-    image: amr0101/auth-service:latest
+    image: seifemam/auth-service:latest
     expose:
       - "8080"
     depends_on:
@@ -123,7 +123,7 @@ services:
     build:
       context: .
       dockerfile: FitnessAPIGateway/Dockerfile
-    image: amr0101/gateway-service:latest
+    image: seifemam/gateway-service:latest
     ports:
       - "8088:8080" # 🌐 The ONLY externally-accessible port
     depends_on:
@@ -138,7 +138,7 @@ services:
     build:
       context: .
       dockerfile: SmartCoachService/Dockerfile
-    image: amr0101/smart-coach-service:latest
+    image: seifemam/smart-coach-service:latest
     expose:
       - "8080"
 
