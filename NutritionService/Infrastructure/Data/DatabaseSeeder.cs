@@ -209,12 +209,13 @@ namespace NutritionService.Infrastructure.Data
         {
             if (await ctx.MealPlans.AnyAsync()) return;
 
-var plans = new List<MealPlan>
+            var plans = new List<MealPlan>
             {
                 // Weight Loss Plans (Low Calorie)
                 new() { Name = "WL-1000", Description = "Weight Loss - 1000 kcal (Very Low)", CalorieTarget = 1000 },
                 new() { Name = "WL-1200", Description = "Weight Loss - 1200 kcal", CalorieTarget = 1200 },
                 new() { Name = "WL-1400", Description = "Weight Loss - 1400 kcal", CalorieTarget = 1400 },
+                new() { Name = "WL-1500", Description = "Weight Loss - 1500 kcal", CalorieTarget = 1500 },
                 new() { Name = "WL-1600", Description = "Weight Loss - 1600 kcal", CalorieTarget = 1600 },
                 new() { Name = "WL-1800", Description = "Weight Loss - 1800 kcal", CalorieTarget = 1800 },
                 new() { Name = "WL-2000", Description = "Weight Loss - 2000 kcal", CalorieTarget = 2000 },

@@ -8,7 +8,7 @@ namespace ProgressTrackingService
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +29,23 @@ namespace ProgressTrackingService
 
             var app = builder.Build();
 
+            // Database Migration & Seeding
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<ProgressDbContext>();
+                    await context.Database.MigrateAsync();
+                    await DatabaseSeeder.SeedAsync(services);
+                }
+                catch (Exception ex)
+                {
+                    // For minimal API, you can use app.Logger
+                    app.Logger.LogError(ex, "An error occurred during migration or seeding.");
+                }
+            }
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -38,7 +55,7 @@ namespace ProgressTrackingService
             // Map Minimal API endpoints
             app.MapProgressEndpoints();
 
-            app.Run();
+            await app.RunAsync();
         }
     }
 }
