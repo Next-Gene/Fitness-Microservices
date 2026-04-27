@@ -20,6 +20,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 // Register MediatR
 builder.Services.AddMediatR(typeof(Program).Assembly);
+// Register HttpClient for cross-service calls
+builder.Services.AddHttpClient();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

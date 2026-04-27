@@ -6,6 +6,7 @@ using NutritionService.Features.Meals.GetMealRecommendations;
 using NutritionService.Infrastructure.Data;
 using NutritionService.Infrastructure.Repositorys;
 using System.Reflection;
+using IServiceProvider = System.IServiceProvider;
 
 namespace NutritionService
 {
@@ -52,13 +53,16 @@ namespace NutritionService
                 var services = scope.ServiceProvider;
                 try
                 {
-                    Console.WriteLine("📊 [Nutrition] Starting database migration...");
+Console.WriteLine("📊 [Nutrition] Starting database migration...");
                     var context = services.GetRequiredService<ApplicationDbContext>();
 
-                    // This creates the NutritionDB database automatically
                     await context.Database.MigrateAsync();
 
                     Console.WriteLine("✅ [Nutrition] Database migration completed.");
+
+                    await DatabaseSeeder.SeedAsync(services);
+
+                    Console.WriteLine("✅ [Nutrition] Database seeding completed.");
                 }
                 catch (Exception ex)
                 {
@@ -83,6 +87,7 @@ namespace NutritionService
             // Endpoint Mapping
             app.MapGetMealRecommendationsEndpoint();
             app.MapGetMealDetailsEndpoint();
+            app.MapMealSuggestionEndpoint();
 
             // ✅ 5. Run Async
             await app.RunAsync();
