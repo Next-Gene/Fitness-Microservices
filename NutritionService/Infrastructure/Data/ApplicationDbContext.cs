@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NutritionService.Domain.Models;
 
 namespace NutritionService.Infrastructure.Data
@@ -8,11 +8,11 @@ namespace NutritionService.Infrastructure.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public DbSet<Ingredient> ingredients { get; set; }
-        public DbSet<Meal> meals { get; set; }
-        public DbSet<MealIngredient> mealIngredients { get; set; }
-        public DbSet<MealPlan> mealPlans { get; set; }
-        public DbSet<NutritionFact> nutritionFacts { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+        public DbSet<MealIngredient> MealIngredients { get; set; }
+        public DbSet<MealPlan> MealPlans { get; set; }
+        public DbSet<NutritionFact> NutritionFacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

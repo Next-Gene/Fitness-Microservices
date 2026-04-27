@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
-namespace Fitness.Data
+namespace FitnessCalculationService.Data
 {
     public class ApplicationUser : IdentityUser
     {

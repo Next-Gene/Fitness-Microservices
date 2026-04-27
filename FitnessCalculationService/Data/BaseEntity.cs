@@ -1,4 +1,4 @@
-﻿namespace Fitness.Data
+namespace FitnessCalculationService.Data
 {
     public class BaseEntity
     {

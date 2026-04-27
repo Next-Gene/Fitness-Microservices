@@ -1,16 +1,15 @@
-﻿using MediatR;
-using Fitness.Features.Dtos;
-using Fitness.Data;
-using Fitness.Infrastructure.Services;
+using MediatR;
+using FitnessCalculationService.Features.Dtos;
+using FitnessCalculationService.Data;
+using FitnessCalculationService.Services;
 using System.Reflection.Metadata;
-using Fitness.Api.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 
-namespace Fitness.Features.WeightGoalActivity.Comands
+namespace FitnessCalculationService.Features.WeightGoalActivity.Comands
 {
     public record WeightGoalActivityAddComand(AddWGA Addwga):IRequest<Guid>;
 
@@ -34,7 +33,7 @@ namespace Fitness.Features.WeightGoalActivity.Comands
 
 
 
-            var add = new Data.WeightGoalActivitydb
+            var add = new WeightGoalActivitydb
             {
                 UserId = dto.UserId,
                 Weight = dto.Weight,

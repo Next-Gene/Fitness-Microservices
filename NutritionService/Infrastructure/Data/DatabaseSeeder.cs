@@ -42,7 +42,7 @@ namespace NutritionService.Infrastructure.Data
 
         private static async Task SeedIngredientsAsync(ApplicationDbContext ctx)
         {
-            if (await ctx.ingredients.AnyAsync()) return;
+            if (await ctx.Ingredients.AnyAsync()) return;
 
             var ingredients = new List<Ingredient>
             {
@@ -201,7 +201,7 @@ namespace NutritionService.Infrastructure.Data
                 new() { Name = "Artichokes" }
             };
 
-            await ctx.ingredients.AddRangeAsync(ingredients);
+            await ctx.Ingredients.AddRangeAsync(ingredients);
             await ctx.SaveChangesAsync();
         }
 
@@ -248,7 +248,7 @@ var plans = new List<MealPlan>
 
         private static async Task SeedMealsAsync(ApplicationDbContext ctx)
         {
-            if (await ctx.meals.AnyAsync()) return;
+            if (await ctx.Meals.AnyAsync()) return;
 
             var plans = await ctx.MealPlans.ToListAsync();
             var wl1200 = plans.First(p => p.Name == "WL-1200");
@@ -259,8 +259,9 @@ var plans = new List<MealPlan>
             var gw3500 = plans.First(p => p.Name == "GW-3500");
             var fit2000 = plans.First(p => p.Name == "FIT-2000");
             var fit2500 = plans.First(p => p.Name == "FIT-2500");
+            var fit2800 = plans.First(p => p.Name == "FIT-2800");
 
-            var ingredients = await ctx.ingredients.ToListAsync();
+            var ingredients = await ctx.Ingredients.ToListAsync();
 
             var chickenBreast = ingredients.First(i => i.Name == "Chicken Breast");
             var salmon = ingredients.First(i => i.Name == "Salmon");
@@ -297,6 +298,11 @@ var plans = new List<MealPlan>
             var zucchini = ingredients.First(i => i.Name == "Zucchini");
             var cucumber = ingredients.First(i => i.Name == "Cucumber");
             var tomatoes = ingredients.First(i => i.Name == "Tomatoes");
+
+            var garlic = ingredients.First(i => i.Name == "Garlic");
+            var asparagus = ingredients.First(i => i.Name == "Asparagus");
+            var beefTenderloin = ingredients.First(i => i.Name == "Beef Tenderloin");
+            var bacon = ingredients.First(i => i.Name == "Bacon");
 
             var honey = ingredients.First(i => i.Name == "Honey");
             var milk = ingredients.First(i => i.Name == "Milk");
@@ -902,7 +908,7 @@ var plans = new List<MealPlan>
                 }
             };
 
-            await ctx.meals.AddRangeAsync(meals);
+            await ctx.Meals.AddRangeAsync(meals);
             await ctx.SaveChangesAsync();
         }
     }

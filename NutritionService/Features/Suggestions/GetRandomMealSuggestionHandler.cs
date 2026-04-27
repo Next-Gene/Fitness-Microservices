@@ -16,7 +16,7 @@ namespace NutritionService.Features.Suggestions
 
         public async Task<RandomMealSuggestionDto> Handle(GetRandomMealSuggestionQuery request, CancellationToken cancellationToken)
         {
-            var query = _context.meals
+            var query = _context.Meals
                 .Include(m => m.NutritionFacts)
                 .Include(m => m.MealIngredients)
                 .ThenInclude(mi => mi.Ingredient)

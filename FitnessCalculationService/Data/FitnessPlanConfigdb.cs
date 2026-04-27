@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Fitness.Data
+namespace FitnessCalculationService.Data
 {
     public class FitnessPlanConfigdb:BaseEntity
     {

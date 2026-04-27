@@ -1,81 +1,83 @@
-using Fitness.Data.Enums;
-using Fitness.Data;
+using FitnessCalculationService.Data.Enums;
+using FitnessCalculationService.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Fitness.Api.Infrastructure.Persistence;
-using Fitness.Infrastructure.Services;
+using FitnessCalculationService.Services;
 
-public record CalculateUserFitnessCommand(Guid UserId) : IRequest<UserFitnessStatdb>;
-
-public class CalculateUserFitnessCommandHandler : IRequestHandler<CalculateUserFitnessCommand, UserFitnessStatdb>
+namespace FitnessCalculationService.Features.WeightGoalActivity.Comands
 {
-    private readonly ApplicationDbContext _context;
-    private readonly IRepository<UserFitnessStatdb> _repo;
-    private readonly IConfiguration _configuration;
-    public CalculateUserFitnessCommandHandler(ApplicationDbContext context, IRepository<UserFitnessStatdb> repo, IConfiguration configuration)
+    public record CalculateUserFitnessCommand(Guid UserId) : IRequest<UserFitnessStatdb>;
+
+    public class CalculateUserFitnessCommandHandler : IRequestHandler<CalculateUserFitnessCommand, UserFitnessStatdb>
     {
-        _context = context;
-        _repo = repo;
-        _configuration = configuration;
-    }
-
-    public async Task<UserFitnessStatdb> Handle(CalculateUserFitnessCommand request, CancellationToken cancellationToken)
-    {
-        var profile = await _context.WeightGoalActivity
-            .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
-
-        if (profile == null)
-            throw new Exception("User profile not found.");
-
-        double bmr = profile.Gender?.ToUpper() switch
+        private readonly ApplicationDbContext _context;
+        private readonly IRepository<UserFitnessStatdb> _repo;
+        private readonly IConfiguration _configuration;
+        public CalculateUserFitnessCommandHandler(ApplicationDbContext context, IRepository<UserFitnessStatdb> repo, IConfiguration configuration)
         {
-            "M" => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age + 5,
-            "F" => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age - 161,
-            _ => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age // Default
-        };
+            _context = context;
+            _repo = repo;
+            _configuration = configuration;
+        }
 
-        double activityFactor = profile.ActivityLevel switch
+        public async Task<UserFitnessStatdb> Handle(CalculateUserFitnessCommand request, CancellationToken cancellationToken)
         {
-            ActivityLevel.Rookie => 1.2,
-            ActivityLevel.Beginner => 1.375,
-            ActivityLevel.Intermediate => 1.55,
-            ActivityLevel.Advance => 1.725,
-            ActivityLevel.TrueBeast => 1.9,
-            _ => 1.2
-        };
+            var profile = await _context.WeightGoalActivity
+                .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
 
-        double tdee = bmr * activityFactor;
+            if (profile == null)
+                throw new Exception("User profile not found.");
 
-        double calorieTarget = profile.Goal switch
-        {
-            Goal.LoseWeight => tdee - 500,
-            Goal.GetFitter => tdee,
-            Goal.GainWeight => tdee + 300,
-            Goal.GainMoreflexible => tdee + 150,
-            Goal.LearntheBasic => tdee,
-            _ => tdee
-        };
+            double bmr = profile.Gender?.ToUpper() switch
+            {
+                "M" => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age + 5,
+                "F" => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age - 161,
+                _ => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age // Default
+            };
 
-        string status = calorieTarget switch
-        {
-            <= 1800 => "Weak",
-            <= 2500 => "Normal",
-            _ => "Hard"
-        };
+            double activityFactor = profile.ActivityLevel switch
+            {
+                ActivityLevel.Rookie => 1.2,
+                ActivityLevel.Beginner => 1.375,
+                ActivityLevel.Intermediate => 1.55,
+                ActivityLevel.Advance => 1.725,
+                ActivityLevel.TrueBeast => 1.9,
+                _ => 1.2
+            };
 
-        var fitnessStat = new UserFitnessStatdb
-        {
-            UserId = profile.Id,
-            Bmr = (decimal)bmr,
-            Tdee = (decimal)tdee,
-            CalorieTarget = (decimal)calorieTarget,
-            Status = status,
-            InsertDate = DateTime.Now
-        };
+            double tdee = bmr * activityFactor;
 
-        await _repo.AddAsync(fitnessStat);
-        await _repo.SaveChanges();
+            double calorieTarget = profile.Goal switch
+            {
+                Goal.LoseWeight => tdee - 500,
+                Goal.GetFitter => tdee,
+                Goal.GainWeight => tdee + 300,
+                Goal.GainMoreflexible => tdee + 150,
+                Goal.LearntheBasic => tdee,
+                _ => tdee
+            };
 
-        return fitnessStat;
+            string status = calorieTarget switch
+            {
+                <= 1800 => "Weak",
+                <= 2500 => "Normal",
+                _ => "Hard"
+            };
+
+            var fitnessStat = new UserFitnessStatdb
+            {
+                UserId = profile.Id,
+                Bmr = (decimal)bmr,
+                Tdee = (decimal)tdee,
+                CalorieTarget = (decimal)calorieTarget,
+                Status = status,
+                InsertDate = DateTime.Now
+            };
+
+            await _repo.AddAsync(fitnessStat);
+            await _repo.SaveChanges();
+
+            return fitnessStat;
+        }
     }
 }

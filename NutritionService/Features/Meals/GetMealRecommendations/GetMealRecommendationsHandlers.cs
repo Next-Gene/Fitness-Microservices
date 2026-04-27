@@ -38,7 +38,7 @@ namespace NutritionService.Features.Meals.GetMealRecommendations
             }
 
             // ✔ 2) Build Query
-            var query = _context.meals
+            var query = _context.Meals
                 .Where(m => !m.IsDeleted)
                 .AsQueryable();
 

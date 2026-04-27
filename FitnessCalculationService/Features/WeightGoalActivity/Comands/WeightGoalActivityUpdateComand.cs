@@ -1,7 +1,7 @@
-﻿using Fitness.Data;
-using Fitness.Data.Enums;
-using Fitness.Features.Dtos;
-using Fitness.Infrastructure.Services;
+using FitnessCalculationService.Data;
+using FitnessCalculationService.Data.Enums;
+using FitnessCalculationService.Features.Dtos;
+using FitnessCalculationService.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
