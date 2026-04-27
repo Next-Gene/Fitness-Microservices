@@ -16,7 +16,7 @@ namespace NutritionService.Infrastructure.Data
             {
                 await SeedIngredientsAsync(ctx);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -25,7 +25,7 @@ namespace NutritionService.Infrastructure.Data
             {
                 await SeedMealPlansAsync(ctx);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -34,7 +34,7 @@ namespace NutritionService.Infrastructure.Data
             {
                 await SeedMealsAsync(ctx);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -198,7 +198,70 @@ namespace NutritionService.Infrastructure.Data
                 new() { Name = "Capers" },
                 new() { Name = "Olives" },
                 new() { Name = "Sundried Tomatoes" },
-                new() { Name = "Artichokes" }
+                new() { Name = "Artichokes" },
+                new() { Name = "Asparagus" },
+                new() { Name = "Garlic" },
+                new() { Name = "Onions" },
+                new() { Name = "Mushrooms" },
+                new() { Name = "Spinach" },
+                new() { Name = "Kale" },
+                new() { Name = "Brussels Sprouts" },
+                new() { Name = "Cauliflower" },
+                new() { Name = "Green Beans" },
+                new() { Name = "Peas" },
+                new() { Name = "Corn" },
+                new() { Name = "Eggplant" },
+                new() { Name = "Cabbage" },
+                new() { Name = "Radish" },
+                new() { Name = "Celery" },
+                new() { Name = "Leeks" },
+                new() { Name = "Ginger" },
+                new() { Name = "Turmeric" },
+                new() { Name = "Cilantro" },
+                new() { Name = "Parsley" },
+                new() { Name = "Basil" },
+                new() { Name = "Oregano" },
+                new() { Name = "Thyme" },
+                new() { Name = "Rosemary" },
+                new() { Name = "Dill" },
+                new() { Name = "Chives" },
+                new() { Name = "Walnuts" },
+                new() { Name = "Cashews" },
+                new() { Name = "Pistachios" },
+                new() { Name = "Pumpkin Seeds" },
+                new() { Name = "Chia Seeds" },
+                new() { Name = "Flax Seeds" },
+                new() { Name = "Hemp Seeds" },
+                new() { Name = "Sunflower Seeds" },
+                new() { Name = "Coconut Oil" },
+                new() { Name = "Butter" },
+                new() { Name = "Ghee" },
+                new() { Name = "Cream" },
+                new() { Name = "Sour Cream" },
+                new() { Name = "Cream Cheese" },
+                new() { Name = "Parmesan" },
+                new() { Name = "Mozzarella" },
+                new() { Name = "Feta" },
+                new() { Name = "Goat Cheese" },
+                new() { Name = "Ricotta" },
+                new() { Name = "Soy Milk" },
+                new() { Name = "Coconut Milk" },
+                new() { Name = "Oat Milk" },
+                new() { Name = "Maple Syrup" },
+                new() { Name = "Stevia" },
+                new() { Name = "Dark Chocolate" },
+                new() { Name = "Cocoa Powder" },
+                new() { Name = "Apple Cider Vinegar" },
+                new() { Name = "Balsamic Vinegar" },
+                new() { Name = "Soy Sauce" },
+                new() { Name = "Sriracha" },
+                new() { Name = "Mustard" },
+                new() { Name = "Ketchup" },
+                new() { Name = "Mayonnaise" },
+                new() { Name = "Hummus" },
+                new() { Name = "Pesto" },
+                new() { Name = "Salsa" },
+                new() { Name = "Guacamole" }
             };
 
             await ctx.Ingredients.AddRangeAsync(ingredients);
