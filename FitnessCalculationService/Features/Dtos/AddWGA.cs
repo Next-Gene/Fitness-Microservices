@@ -1,6 +1,6 @@
-﻿using Fitness.Data.Enums;
+using FitnessCalculationService.Data.Enums;
 
-namespace Fitness.Features.Dtos
+namespace FitnessCalculationService.Features.Dtos
 {
     public class AddWGA
     {

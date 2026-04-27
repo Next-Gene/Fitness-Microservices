@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NutritionService.Domain.Interfaces;
 using NutritionService.Features.Meals.GetMealDetails;
 using NutritionService.Features.Meals.GetMealRecommendations;
+using NutritionService.Features.Suggestions;
 using NutritionService.Infrastructure.Data;
 using NutritionService.Infrastructure.Repositorys;
 using System.Reflection;

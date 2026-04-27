@@ -1,5 +1,5 @@
-using Fitness.Features.Dtos;
-using Fitness.Features.Suggestions;
+using FitnessCalculationService.Features.Dtos;
+using FitnessCalculationService.Features.Suggestions;
 using FitnessCalculationService.Features.WeightGoalActivity.Comands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

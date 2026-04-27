@@ -1,6 +1,6 @@
-﻿using Fitness.Data.Enums;
+using FitnessCalculationService.Data.Enums;
 
-namespace Fitness.Data
+namespace FitnessCalculationService.Data
 {
     public class WeightGoalActivitydb:BaseEntity
     {

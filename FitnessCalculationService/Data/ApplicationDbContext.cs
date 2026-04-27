@@ -1,11 +1,11 @@
-﻿using Fitness.Data;
+using FitnessCalculationService.Data;
 using Microsoft.AspNetCore.Identity;
 
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
 
-namespace Fitness.Api.Infrastructure.Persistence;
+namespace FitnessCalculationService.Data;
 
 public class ApplicationDbContext : DbContext
 {
@@ -27,7 +27,7 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         // Apply configurations
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyReference).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
 
 

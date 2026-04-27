@@ -35,7 +35,7 @@ namespace NutritionService.Features.Meals.GetMealDetails
             }
 
             // ✔ 2) Fetch From DB
-            var meal = await _context.meals
+            var meal = await _context.Meals
                 .Where(m => m.Id == request.Id && !m.IsDeleted)
                 .Select(m => new MealDetailsDto
                 {
