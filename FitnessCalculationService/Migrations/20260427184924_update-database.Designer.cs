@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessCalculationService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251128151050_init")]
-    partial class init
+    [Migration("20260427184924_update-database")]
+    partial class updatedatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace FitnessCalculationService.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Fitness.Data.FitnessPlanConfigdb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.FitnessPlanConfigdb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace FitnessCalculationService.Migrations
                     b.ToTable("FitnessPlanConfig");
                 });
 
-            modelBuilder.Entity("Fitness.Data.UserFitnessStatdb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.UserFitnessStatdb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,18 +108,18 @@ namespace FitnessCalculationService.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("WeightGoalActivityId")
+                    b.Property<Guid>("weightGoalActivityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WeightGoalActivityId")
+                    b.HasIndex("weightGoalActivityId")
                         .IsUnique();
 
                     b.ToTable("UserFitnessStat");
                 });
 
-            modelBuilder.Entity("Fitness.Data.WeightGoalActivitydb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.WeightGoalActivitydb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,9 +153,8 @@ namespace FitnessCalculationService.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Weight")
                         .HasColumnType("float");
@@ -165,7 +164,7 @@ namespace FitnessCalculationService.Migrations
                     b.ToTable("WeightGoalActivity");
                 });
 
-            modelBuilder.Entity("Fitness.Data.WorkoutPlandb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.WorkoutPlandb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,33 +203,33 @@ namespace FitnessCalculationService.Migrations
                     b.ToTable("WorkoutPlandb");
                 });
 
-            modelBuilder.Entity("Fitness.Data.FitnessPlanConfigdb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.FitnessPlanConfigdb", b =>
                 {
-                    b.HasOne("Fitness.Data.WorkoutPlandb", "WorkoutPlan")
+                    b.HasOne("FitnessCalculationService.Data.WorkoutPlandb", "WorkoutPlan")
                         .WithMany("FitnessPlanConfigs")
                         .HasForeignKey("WorkoutPlanId1");
 
                     b.Navigation("WorkoutPlan");
                 });
 
-            modelBuilder.Entity("Fitness.Data.UserFitnessStatdb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.UserFitnessStatdb", b =>
                 {
-                    b.HasOne("Fitness.Data.WeightGoalActivitydb", "WeightGoalActivity")
+                    b.HasOne("FitnessCalculationService.Data.WeightGoalActivitydb", "weightGoalActivity")
                         .WithOne("FitnessStat")
-                        .HasForeignKey("Fitness.Data.UserFitnessStatdb", "WeightGoalActivityId")
+                        .HasForeignKey("FitnessCalculationService.Data.UserFitnessStatdb", "weightGoalActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("WeightGoalActivity");
+                    b.Navigation("weightGoalActivity");
                 });
 
-            modelBuilder.Entity("Fitness.Data.WeightGoalActivitydb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.WeightGoalActivitydb", b =>
                 {
                     b.Navigation("FitnessStat")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Fitness.Data.WorkoutPlandb", b =>
+            modelBuilder.Entity("FitnessCalculationService.Data.WorkoutPlandb", b =>
                 {
                     b.Navigation("FitnessPlanConfigs");
                 });
