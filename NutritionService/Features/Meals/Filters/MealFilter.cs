@@ -1,4 +1,5 @@
-﻿using NutritionService.Domain.Models;
+using NutritionService.Domain.Models;
+using NutritionService.Domain.Models.Enums;
 
 namespace NutritionService.Features.Meals.Filters
 {
@@ -10,8 +11,8 @@ namespace NutritionService.Features.Meals.Filters
             int? maxCalories,
             int? minProtein)
         {
-            if (!string.IsNullOrWhiteSpace(mealType))
-                query = query.Where(m => m.mealType.ToString() == mealType);
+            if (!string.IsNullOrWhiteSpace(mealType) && Enum.TryParse<MealType>(mealType, true, out var typeEnum))
+                query = query.Where(m => m.mealType == typeEnum);
 
             if (maxCalories.HasValue)
                 query = query.Where(m => m.NutritionFacts.Calories <= maxCalories);

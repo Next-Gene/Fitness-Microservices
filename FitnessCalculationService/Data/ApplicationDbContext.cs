@@ -19,7 +19,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<WorkoutPlandb> WorkoutPlans { get; set; }
     public DbSet<WeightGoalActivitydb> WeightGoalActivity { get; set; }
     public DbSet<UserFitnessStatdb> UserFitnessStat { get; set; }
-    public DbSet<WorkoutPlandb> WorkoutPlan { get; set; }
     public DbSet<FitnessPlanConfigdb> FitnessPlanConfig { get; set; }
 
 

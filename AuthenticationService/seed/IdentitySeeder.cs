@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using AuthenticationService.Models;
 
 namespace AuthenticationService.Data.Seed
@@ -17,6 +17,7 @@ namespace AuthenticationService.Data.Seed
                 }
             }
 
+            // Seed Admin
             var adminEmail = "seifmoataz27249@gmail.com";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
@@ -28,30 +29,34 @@ namespace AuthenticationService.Data.Seed
                     Email = adminEmail,
                     FirstName = "System",
                     LastName = "Admin",
-                    ActivtyLevel = "Medium" ,  // 🔥 حط أي قيمة Default
-                    Goal ="Lose Wighet",
-                    Age = 21 ,
+                    ActivtyLevel = "Medium",
+                    Goal = "Lose Weight",
+                    Age = 21,
                     Height = 180,
                     Weight = 120,
-                    Gender="Male",
+                    Gender = "Male",
                     EmailConfirmed = true,
                     PhoneNumber = "01000000000"
                 };
 
                 var result = await userManager.CreateAsync(user, "Admin@123");
+                if (result.Succeeded) await userManager.AddToRoleAsync(user, "Admin");
+            }
 
-                if (result.Succeeded)
+            // Seed Mock Users
+            var mockUsers = new List<ApplicationUser>
+            {
+                new() { UserName = "JohnWeightLoss", Email = "john@example.com", FirstName = "John", LastName = "Doe", Age = 30, Height = 175, Weight = 95, Gender = "Male", ActivtyLevel = "Low", Goal = "Lose Weight", EmailConfirmed = true },
+                new() { UserName = "JaneMuscleGain", Email = "jane@example.com", FirstName = "Jane", LastName = "Smith", Age = 25, Height = 165, Weight = 55, Gender = "Female", ActivtyLevel = "High", Goal = "Gain Weight", EmailConfirmed = true },
+                new() { UserName = "MikeFit", Email = "mike@example.com", FirstName = "Mike", LastName = "Johnson", Age = 35, Height = 185, Weight = 85, Gender = "Male", ActivtyLevel = "Medium", Goal = "Get Fitter", EmailConfirmed = true }
+            };
+
+            foreach (var user in mockUsers)
+            {
+                if (await userManager.FindByEmailAsync(user.Email!) == null)
                 {
-                    await userManager.AddToRoleAsync(user, "Admin");
-                    Console.WriteLine("Default Admin user created successfully!");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Failed to create default Admin user:");
-                    foreach (var error in result.Errors)
-                        Console.WriteLine($" - {error.Description}");
-                    Console.ResetColor();
+                    var result = await userManager.CreateAsync(user, "User@123");
+                    if (result.Succeeded) await userManager.AddToRoleAsync(user, "User");
                 }
             }
         }
