@@ -308,7 +308,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Egg White Omelette",
                     Description = "Fluffy egg whites with fresh vegetables",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 10,
                     ImageUrl = "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
@@ -326,7 +326,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Grilled Chicken Salad",
                     Description = "Lean protein with fresh greens",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 20,
                     ImageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
@@ -345,7 +345,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Baked Salmon with Asparagus",
                     Description = "Omega-3 rich fish with vegetables",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 25,
                     ImageUrl = "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
@@ -363,7 +363,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Greek Yogurt Cup",
                     Description = "High-protein snack",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 2,
                     ImageUrl = "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
@@ -380,7 +380,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Oatmeal with Berries",
                     Description = "Complex carbs with antioxidants",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 10,
                     ImageUrl = "https://images.unsplash.com/photo-1517673400267-0251440c45cc?w=400",
@@ -398,7 +398,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Turkey Bento Bowl",
                     Description = "Lean turkey with rice and veggies",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 25,
                     ImageUrl = "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400",
@@ -416,7 +416,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Grilled Chicken Quinoa",
                     Description = "Complete protein with leafy greens",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 30,
                     ImageUrl = "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400",
@@ -434,7 +434,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Apple with Almonds",
                     Description = "Fiber-rich fruit and nut combo",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 1,
                     ImageUrl = "https://images.unsplash.com/photo-1560806887-1e4cd0b6cde7?w=400",
@@ -452,7 +452,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Protein Pancakes",
                     Description = "Fluffy protein pancakes",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 20,
                     ImageUrl = "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400",
@@ -471,7 +471,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Tuna Poke Bowl",
                     Description = "Protein-packed fish bowl",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 15,
                     ImageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
@@ -489,7 +489,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Steak and Sweet Potato",
                     Description = "Iron-rich dinner",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 35,
                     ImageUrl = "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400",
@@ -507,7 +507,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Cottage Cheese Bowl",
                     Description = "Creamy protein snack",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 2,
                     ImageUrl = "https://images.unsplash.com/photo-1559561853-08451507cbe7?w=400",
@@ -525,7 +525,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Mega Breakfast Scramble",
                     Description = "High-calorie breakfast",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 15,
                     ImageUrl = "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
@@ -544,7 +544,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Chicken Rice Large Bowl",
                     Description = "Mass builder bowl",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 25,
                     ImageUrl = "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400",
@@ -562,7 +562,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Salmon Power Dinner",
                     Description = "Omega-3 muscle recovery",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 30,
                     ImageUrl = "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
@@ -580,7 +580,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Peanut Butter Banana Shake",
                     Description = "Mass gainer shake",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 5,
                     ImageUrl = "https://images.unsplash.com/photo-1553530666-ba11a7da0696?w=400",
@@ -600,7 +600,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Triple Protein Oatmeal",
                     Description = "Massive morning carbs",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 10,
                     ImageUrl = "https://images.unsplash.com/photo-1517673400267-0251440c45cc?w=400",
@@ -619,7 +619,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Beef Large Bowl",
                     Description = "Red meat mass builder",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 30,
                     ImageUrl = "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400",
@@ -637,7 +637,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Triple Protein Dinner",
                     Description = "Ultimate recovery meal",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 40,
                     ImageUrl = "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400",
@@ -656,7 +656,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Mass Gainer Shake",
                     Description = "Calorie-dense shake",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 5,
                     ImageUrl = "https://images.unsplash.com/photo-1553530666-ba11a7da0696?w=400",
@@ -676,7 +676,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Monster Breakfast",
                     Description = "Ultimate bulk breakfast",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 20,
                     ImageUrl = "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
@@ -696,7 +696,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Mass Monster Bowl",
                     Description = "Extreme calorie bowl",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 30,
                     ImageUrl = "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400",
@@ -716,7 +716,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Triple Meat Dinner",
                     Description = "Maximum protein dinner",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Hard",
                     PrepTimeInMinutes = 45,
                     ImageUrl = "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400",
@@ -736,7 +736,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Mega Gainer Shake",
                     Description = "Extreme shake",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 5,
                     ImageUrl = "https://images.unsplash.com/photo-1553530666-ba11a7da0696?w=400",
@@ -757,7 +757,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Balanced Breakfast",
                     Description = "Perfect morning fuel",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 10,
                     ImageUrl = "https://images.unsplash.com/photo-1517673400267-0251440c45cc?w=400",
@@ -775,7 +775,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Balanced Lunch Bowl",
                     Description = "Complete macro meal",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 20,
                     ImageUrl = "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400",
@@ -793,7 +793,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Salmon with Quinoa",
                     Description = "Omega-3 balanced dinner",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 25,
                     ImageUrl = "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400",
@@ -811,7 +811,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Greek Yogurt Parfait",
                     Description = "Protein-packed snack",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 5,
                     ImageUrl = "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400",
@@ -830,7 +830,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Power Breakfast",
                     Description = "High-energy morning",
-                    MealType = MealType.Breakfast,
+                    mealType = MealType.Breakfast,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 15,
                     ImageUrl = "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
@@ -848,7 +848,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Power Lunch Bowl",
                     Description = "Training day fuel",
-                    MealType = MealType.Lunch,
+                    mealType = MealType.Lunch,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 25,
                     ImageUrl = "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400",
@@ -867,7 +867,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Recovery Dinner",
                     Description = "Post-workout recovery",
-                    MealType = MealType.Dinner,
+                    mealType = MealType.Dinner,
                     Difficulty = "Medium",
                     PrepTimeInMinutes = 30,
                     ImageUrl = "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400",
@@ -886,7 +886,7 @@ var plans = new List<MealPlan>
                 new() {
                     Name = "Post-Workout Shake",
                     Description = "Recovery shake",
-                    MealType = MealType.Snack,
+                    mealType = MealType.Snack,
                     Difficulty = "Easy",
                     PrepTimeInMinutes = 5,
                     ImageUrl = "https://images.unsplash.com/photo-1553530666-ba11a7da0696?w=400",

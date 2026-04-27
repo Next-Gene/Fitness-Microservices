@@ -44,24 +44,3 @@ namespace FitnessCalculationService.controller
         }
     }
 }
-
-        [HttpPost]
-        public async Task<IActionResult> AddWga([FromBody] AddWGA dto)
-        {
-            var userId = await _mediator.Send(new WeightGoalActivityAddComand(dto));
-            var stats = await _mediator.Send(new CalculateUserFitnessCommand(userId));
-            return Ok(new { Success = true, UserId = userId, Stats = stats });
-        }
-
-        [HttpPut("{userId:guid}")]
-        public async Task<IActionResult> UpdateWga(Guid userId, [FromBody] AddWGA dto)
-        {
-            if (userId != dto.UserId)
-                return BadRequest("UserId mismatch");
-
-            var id = await _mediator.Send(new WeightGoalActivityUpdateComand(dto));
-            var stats = await _mediator.Send(new CalculateUserFitnessCommand(userId));
-            return Ok(new { Success = true, UserId = id, Stats = stats });
-        }
-    }
-}
