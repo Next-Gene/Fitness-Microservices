@@ -222,6 +222,39 @@ namespace WorkoutService.Infrastructure.Data
                     Goal = "Recovery",
                     Status = "Easy",
                     Difficulty = "Beginner"
+                },
+                // ===== HOME WORKOUT PLANS =====
+                new() {
+                    ExternalPlanId = "plan_home_beginner",
+                    Name = "Home Workout - Beginner",
+                    Description = "No equipment needed. Perfect for home workouts.",
+                    Goal = "Get Fitter",
+                    Status = "Easy",
+                    Difficulty = "Beginner"
+                },
+                new() {
+                    ExternalPlanId = "plan_home_intermediate",
+                    Name = "Home Workout - Intermediate",
+                    Description = "More challenging bodyweight exercises for home.",
+                    Goal = "Get Fitter",
+                    Status = "Normal",
+                    Difficulty = "Intermediate"
+                },
+                new() {
+                    ExternalPlanId = "plan_home_hiit",
+                    Name = "Home HIIT - Quick Sweat",
+                    Description = "High-intensity interval training at home.",
+                    Goal = "Lose Weight",
+                    Status = "Hard",
+                    Difficulty = "Intermediate"
+                },
+                new() {
+                    ExternalPlanId = "plan_quick_15",
+                    Name = "15-Minute Quick Sweat",
+                    Description = "Quick workouts for busy schedules.",
+                    Goal = "Get Fitter",
+                    Status = "Easy",
+                    Difficulty = "Beginner"
                 }
             };
 
@@ -381,6 +414,345 @@ namespace WorkoutService.Infrastructure.Data
                     TargetMuscles = new List<string> { "Biceps" },
                     EquipmentNeeded = new List<string> { "Dumbbells", "Barbell" }
                 },
+                // ===== BEGINNER HOME EXERCISES =====
+                new() {
+                    Name = "Wall Push-up",
+                    Description = "An easier push-up variation using a wall for support.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Chest", "Triceps" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Knee Push-up",
+                    Description = "Push-up from the knees for beginners.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Chest", "Triceps" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Chair Squat",
+                    Description = "Squat to a chair for support and form guidance.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Glute Bridge",
+                    Description = "Floor exercise targeting the glutes and hamstrings.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Glutes", "Hamstrings" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Bird Dog",
+                    Description = "Core and balance exercise on all fours.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Core", "Back" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Marching in Place",
+                    Description = "Low-impact cardio to get moving.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "High Knees",
+                    Description = "Running in place with high knee lifts.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Cardio", "Quads" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Mountain Climber",
+                    Description = "Dynamic core and cardio exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Core", "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Bicycle Crunch",
+                    Description = "Effective ab exercise targeting obliques.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Abs", "Obliques" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Dead Bug",
+                    Description = "Core stability exercise.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Core", "Abs" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Superman",
+                    Description = "Back extension for lower back strength.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Back", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Wall Sit",
+                    Description = "Isometric leg exercise against a wall.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Calf Raise",
+                    Description = "Standing calf raises without equipment.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Calves" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Lunge",
+                    Description = "Unilateral leg exercise.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Side Lunge",
+                    Description = "Lateral movement for inner thighs.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Inner Thighs" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Skater Hop",
+                    Description = "Lateral plyometric exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Quads", "Glutes", "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Squat Jump",
+                    Description = "Explosive lower body exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Quads", "Glutes", "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                // ===== MORE EQUIPMENT-FREE EXERCISES =====
+                new() {
+                    Name = "Bodyweight Row (Towel)",
+                    Description = "Towel row for back development.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Back", "Biceps" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Inchworm",
+                    Description = "Full body stretch and core exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Core", "Shoulders" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Pike Push-up",
+                    Description = "Advanced push-up variation.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Chest", "Shoulders", "Triceps" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Diamond Push-up",
+                    Description = "Close-grip push-up for triceps.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Triceps", "Chest" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Wide Push-up",
+                    Description = "Wide-grip push-up for chest.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Chest" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Tricep Dip (Chair)",
+                    Description = "Tricep dip using a chair.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Triceps", "Shoulders" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Single-Leg Squat",
+                    Description = "Pistol squat progression.",
+                    Difficulty = "Advanced",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Sumo Squat",
+                    Description = "Wide-stance squat.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes", "Inner Thighs" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Jump Squat",
+                    Description = "Explosive squat jump.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Quads", "Glutes", "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Curtsey Lunge",
+                    Description = "Lateral lunge variation.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Reverse Lunge",
+                    Description = "Lunge stepping back.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Hip Thrust",
+                    Description = "Floor hip thrust for glutes.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Donkey Kick",
+                    Description = "Glute kickback.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Fire Hydrant",
+                    Description = "Hip abduction exercise.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Glutes", "Outer Thighs" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Heel Tap",
+                    Description = "Core exercise for obliques.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Obliques", "Core" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "V-Up",
+                    Description = "Advanced core exercise.",
+                    Difficulty = "Advanced",
+                    TargetMuscles = new List<string> { "Abs", "Core" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Toe Touch",
+                    Description = "Standing core exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Abs", "Core" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Flutter Kick",
+                    Description = "Core and hip flexor exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Abs", "Hip Flexors" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Plank Tap",
+                    Description = "Plank with arm taps.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Core", "Shoulders" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Bear Crawl",
+                    Description = "Crawling core exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Core", "Shoulders" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Squat Hold",
+                    Description = "Isometric squat hold.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Pulse Squat",
+                    Description = "Small pulse in squat position.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Isometric Wall Sit",
+                    Description = "Wall sit hold.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Clapping Jack",
+                    Description = "Jumping jacks with claps.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Butt Kicks",
+                    Description = "Running in place kicking heels to glutes.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Cardio", "Hamstrings" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Skaters",
+                    Description = "Lateral skating movement.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Cardio", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Fast Feet",
+                    Description = "Quick feet shuffling.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Square Jump",
+                    Description = "Jump in four directions.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Cardio", "Quads" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Plank Jack",
+                    Description = "Plank with jumping jacks.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Core", "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Tuck Jump",
+                    Description = "Jump with knees to chest.",
+                    Difficulty = "Advanced",
+                    TargetMuscles = new List<string> { "Cardio", "Quads" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Star Jump",
+                    Description = "Jump with limbs extended.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Cardio" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                // ===== GYM EXERCISES =====
                 new() {
                     Name = "Tricep Pushdown",
                     Description = "Isolates the triceps using a cable machine.",
@@ -469,6 +841,10 @@ namespace WorkoutService.Infrastructure.Data
             var planEndIntermediate = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_end_intermediate");
             var planBodyAdvanced = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_body_advanced");
             var planRecActive = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_rec_active");
+            var planHomeBeginner = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_home_beginner");
+            var planHomeIntermediate = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_home_intermediate");
+            var planHomeHiit = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_home_hiit");
+            var planQuick15 = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_quick_15");
 
             var pushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Push-up");
             var squat = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Bodyweight Squat");
@@ -499,6 +875,23 @@ namespace WorkoutService.Infrastructure.Data
             var running = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Running");
             var jumpingJacks = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Jumping Jacks");
             var burpee = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Burpee");
+
+            // Home exercises
+            var wallPushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wall Push-up");
+            var kneePushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Knee Push-up");
+            var chairSquat = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Chair Squat");
+            var gluteBridge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Glute Bridge");
+            var birdDog = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Bird Dog");
+            var marching = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Marching in Place");
+            var highKnees = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "High Knees");
+            var mountainClimber = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Mountain Climber");
+            var bicycleCrunch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Bicycle Crunch");
+            var deadBug = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dead Bug");
+            var superman = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Superman");
+            var wallSit = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wall Sit");
+            var squatJump = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Squat Jump");
+            var sideLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Lunge");
+            var skaterHop = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Skater Hop");
 
             // Safety check
             if (planBeginner == null || planNormal == null || pushup == null) return;
@@ -735,6 +1128,139 @@ namespace WorkoutService.Infrastructure.Data
                         new() { Exercise = running, Order = 1, Sets = 1, Reps = "10 minutes light jog", RestTimeInSeconds = 0 },
                         new() { Exercise = jumpingJacks, Order = 2, Sets = 2, Reps = "30s", RestTimeInSeconds = 30 },
                         new() { Exercise = plank, Order = 3, Sets = 2, Reps = "30s", RestTimeInSeconds = 30 }
+                    }
+                },
+
+                // ===== HOME WORKOUTS =====
+                new() {
+                    Name = "No-Equipment Home Workout",
+                    Description = "Complete workout with zero equipment. Perfect for home.",
+                    Category = "Home Workout",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 30,
+                    CaloriesBurn = 200,
+                    IsPremium = false,
+                    Rating = 4.7,
+                    WorkoutPlan = planHomeBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = wallPushup, Order = 1, Sets = 3, Reps = "10-15", RestTimeInSeconds = 60 },
+                        new() { Exercise = chairSquat, Order = 2, Sets = 3, Reps = "15", RestTimeInSeconds = 60 },
+                        new() { Exercise = gluteBridge, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 45 },
+                        new() { Exercise = plank, Order = 4, Sets = 3, Reps = "30s", RestTimeInSeconds = 45 },
+                        new() { Exercise = marching, Order = 5, Sets = 1, Reps = "5 minutes", RestTimeInSeconds = 0 }
+                    }
+                },
+                new() {
+                    Name = "Morning Mobility",
+                    Description = "Gentle movements to start your day.",
+                    Category = "Home Workout",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 15,
+                    CaloriesBurn = 80,
+                    IsPremium = false,
+                    Rating = 4.8,
+                    WorkoutPlan = planHomeBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = marching, Order = 1, Sets = 1, Reps = "3 minutes", RestTimeInSeconds = 0 },
+                        new() { Exercise = birdDog, Order = 2, Sets = 2, Reps = "10 each side", RestTimeInSeconds = 30 },
+                        new() { Exercise = gluteBridge, Order = 3, Sets = 2, Reps = "10", RestTimeInSeconds = 30 },
+                        new() { Exercise = superman, Order = 4, Sets = 2, Reps = "10", RestTimeInSeconds = 30 }
+                    }
+                },
+                new() {
+                    Name = "Living Room HIIT",
+                    Description = "High-intensity workout in your living room.",
+                    Category = "Home Workout",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 25,
+                    CaloriesBurn = 350,
+                    IsPremium = false,
+                    Rating = 4.9,
+                    WorkoutPlan = planHomeHiit,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = jumpingJacks, Order = 1, Sets = 4, Reps = "30s", RestTimeInSeconds = 15 },
+                        new() { Exercise = highKnees, Order = 2, Sets = 4, Reps = "30s", RestTimeInSeconds = 15 },
+                        new() { Exercise = mountainClimber, Order = 3, Sets = 4, Reps = "30s", RestTimeInSeconds = 15 },
+                        new() { Exercise = squatJump, Order = 4, Sets = 4, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = burpee, Order = 5, Sets = 3, Reps = "10", RestTimeInSeconds = 45 }
+                    }
+                },
+                new() {
+                    Name = "15-Minute Express",
+                    Description = "Quick workout for busy days.",
+                    Category = "Quick 15",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 15,
+                    CaloriesBurn = 120,
+                    IsPremium = false,
+                    Rating = 4.5,
+                    WorkoutPlan = planQuick15,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = jumpingJacks, Order = 1, Sets = 1, Reps = "2 minutes", RestTimeInSeconds = 0 },
+                        new() { Exercise = wallPushup, Order = 2, Sets = 3, Reps = "10", RestTimeInSeconds = 30 },
+                        new() { Exercise = chairSquat, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = plank, Order = 4, Sets = 2, Reps = "30s", RestTimeInSeconds = 30 }
+                    }
+                },
+                new() {
+                    Name = "Core at Home",
+                    Description = "No-equipment ab workout.",
+                    Category = "Home Workout",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 20,
+                    CaloriesBurn = 130,
+                    IsPremium = false,
+                    Rating = 4.6,
+                    WorkoutPlan = planHomeBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = plank, Order = 1, Sets = 3, Reps = "30s", RestTimeInSeconds = 30 },
+                        new() { Exercise = bicycleCrunch, Order = 2, Sets = 3, Reps = "20", RestTimeInSeconds = 30 },
+                        new() { Exercise = deadBug, Order = 3, Sets = 3, Reps = "10 each side", RestTimeInSeconds = 30 },
+                        new() { Exercise = superman, Order = 4, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = gluteBridge, Order = 5, Sets = 3, Reps = "15", RestTimeInSeconds = 30 }
+                    }
+                },
+                new() {
+                    Name = "Advanced Bodyweight Burn",
+                    Description = "Challenging bodyweight workout at home.",
+                    Category = "Home Workout",
+                    Difficulty = "Advanced",
+                    DurationInMinutes = 45,
+                    CaloriesBurn = 450,
+                    IsPremium = true,
+                    Rating = 5,
+                    WorkoutPlan = planHomeIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = squatJump, Order = 1, Sets = 4, Reps = "15", RestTimeInSeconds = 60 },
+                        new() { Exercise = mountainClimber, Order = 2, Sets = 4, Reps = "30s", RestTimeInSeconds = 30 },
+                        new() { Exercise = burpee, Order = 3, Sets = 4, Reps = "15", RestTimeInSeconds = 60 },
+                        new() { Exercise = skaterHop, Order = 4, Sets = 3, Reps = "20 each side", RestTimeInSeconds = 45 },
+                        new() { Exercise = plank, Order = 5, Sets = 3, Reps = "60s", RestTimeInSeconds = 45 }
+                    }
+                },
+                new() {
+                    Name = "Lower Body Home",
+                    Description = "Leg-focused home workout.",
+                    Category = "Home Workout",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 30,
+                    CaloriesBurn = 280,
+                    IsPremium = false,
+                    Rating = 4.7,
+                    WorkoutPlan = planHomeIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = squat, Order = 1, Sets = 4, Reps = "15", RestTimeInSeconds = 60 },
+                        new() { Exercise = lunge, Order = 2, Sets = 3, Reps = "12 each leg", RestTimeInSeconds = 45 },
+                        new() { Exercise = gluteBridge, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = wallSit, Order = 4, Sets = 3, Reps = "30s", RestTimeInSeconds = 45 },
+                        new() { Exercise = sideLunge, Order = 5, Sets = 3, Reps = "12 each side", RestTimeInSeconds = 30 }
                     }
                 }
             };

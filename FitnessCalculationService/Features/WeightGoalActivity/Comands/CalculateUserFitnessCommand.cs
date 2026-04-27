@@ -1,13 +1,13 @@
-﻿using Fitness.Data.Enums;
+using Fitness.Data.Enums;
 using Fitness.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Fitness.Api.Infrastructure.Persistence;
 using Fitness.Infrastructure.Services;
 
-public record CalculateUserFitnessCommand(Guid UserId) : IRequest<Guid>;
+public record CalculateUserFitnessCommand(Guid UserId) : IRequest<UserFitnessStatdb>;
 
-public class CalculateUserFitnessCommandHandler : IRequestHandler<CalculateUserFitnessCommand, Guid>
+public class CalculateUserFitnessCommandHandler : IRequestHandler<CalculateUserFitnessCommand, UserFitnessStatdb>
 {
     private readonly ApplicationDbContext _context;
     private readonly IRepository<UserFitnessStatdb> _repo;
@@ -19,7 +19,7 @@ public class CalculateUserFitnessCommandHandler : IRequestHandler<CalculateUserF
         _configuration = configuration;
     }
 
-    public async Task<Guid> Handle(CalculateUserFitnessCommand request, CancellationToken cancellationToken)
+    public async Task<UserFitnessStatdb> Handle(CalculateUserFitnessCommand request, CancellationToken cancellationToken)
     {
         var profile = await _context.WeightGoalActivity
             .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
@@ -27,11 +27,11 @@ public class CalculateUserFitnessCommandHandler : IRequestHandler<CalculateUserF
         if (profile == null)
             throw new Exception("User profile not found.");
 
-        double bmr = profile.Gender.ToUpper() switch
+        double bmr = profile.Gender?.ToUpper() switch
         {
             "M" => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age + 5,
             "F" => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age - 161,
-            _ => throw new Exception("Invalid gender value.")
+            _ => 10 * profile.Weight + 6.25 * profile.Height - 5 * profile.Age // Default
         };
 
         double activityFactor = profile.ActivityLevel switch
@@ -76,6 +76,6 @@ public class CalculateUserFitnessCommandHandler : IRequestHandler<CalculateUserF
         await _repo.AddAsync(fitnessStat);
         await _repo.SaveChanges();
 
-        return fitnessStat.Id;
+        return fitnessStat;
     }
 }
