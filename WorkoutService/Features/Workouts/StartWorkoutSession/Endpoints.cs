@@ -36,20 +36,22 @@ namespace WorkoutService.Features.Workouts.StartWorkoutSession
 
         private static async Task<IResult> HandleStartWorkout(IMediator mediator, int id, StartWorkoutSessionDto dto)
         {
-            var command = new StartWorkoutSessionCommand(id, dto.UserId, dto);
+            var command = new StartWorkoutSessionCommand(id, dto);
             var result = await mediator.Send(command);
 
             if (!result.IsSuccess)
             {
                 var statusCode = result.Message.Contains("not authenticated") ? 401 : 400;
-                return Results.BadRequest(new EndpointResponse<object>(
+                var response = new EndpointResponse<object>(
                     null,
                     result.Message,
                     false,
                     statusCode,
                     new List<string> { result.Message },
                     DateTime.UtcNow
-                ));
+                );
+
+                return Results.Json(response, statusCode: statusCode);
             }
 
             return Results.Ok(new EndpointResponse<WorkoutSessionViewModel>(
