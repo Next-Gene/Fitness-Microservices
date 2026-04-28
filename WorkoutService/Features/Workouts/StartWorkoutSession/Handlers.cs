@@ -38,7 +38,7 @@ namespace WorkoutService.Features.Workouts.StartWorkoutSession
             await _publishEndpoint.Publish<IWorkoutSessionStarted>(new
             {
                 WorkoutId = request.WorkoutId,
-                UserId = request.UserId, // ✅ Using the User ID passed from frontend
+                UserId = _currentUserService.UserId, // ✅ Using the User ID from the authenticated user
                 PlannedDurationMinutes = request.Dto.PlannedDuration,
                 Difficulty = request.Dto.Difficulty,
                 StartedAt = startedAt
