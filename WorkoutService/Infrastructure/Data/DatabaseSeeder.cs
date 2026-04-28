@@ -951,6 +951,7 @@ namespace WorkoutService.Infrastructure.Data
             var planNormal = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_lw_normal");
             var planFitIntermediate = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_fit_intermediate");
             var planFitAdvanced = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_fit_advanced");
+            var planFitBeginner = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_fit_beginner");
             var planLwEasy = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_lw_easy");
             var planLwHard = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_lw_hard");
             var planLwIntermediate = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_lw_normal");
@@ -967,6 +968,7 @@ namespace WorkoutService.Infrastructure.Data
             var planHomeHiit = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_home_hiit");
             var planQuick15 = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_quick_15");
 
+            // Primary exercise lookups
             var pushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Push-up");
             var squat = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Bodyweight Squat");
             var plank = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Plank");
@@ -997,6 +999,47 @@ namespace WorkoutService.Infrastructure.Data
             var jumpingJacks = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Jumping Jacks");
             var burpee = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Burpee");
 
+            // Additional exercise lookups for new workouts
+            var inclineBenchPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Bench Press");
+            var dumbbellFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Fly");
+            var barbellRow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Row");
+            var seatedCableRow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Seated Cable Row");
+            var legExtension = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Extension");
+            var walkingLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Walking Lunge");
+            var legCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Curl");
+            var hipThrust = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Thrust");
+            var dumbbellShoulderPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shoulder Press");
+            var frontRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Front Raise");
+            var rearDeltFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Rear Delt Fly");
+            var dumbbellShrug = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shrug");
+            var barbellCurlEx = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Curl");
+            var closeGripBench = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Close Grip Bench Press");
+            var inclineDumbbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Dumbbell Curl");
+            var tricepDip = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Tricep Dip");
+            var wristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wrist Curl");
+            var reverseWristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Reverse Wrist Curl");
+            var farmerWalk = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Farmer's Walk");
+            var hangingLegRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hanging Leg Raise");
+            var cableCrunch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cable Crunch");
+            var sidePlank = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Plank");
+            var catCow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cat-Cow Stretch");
+            var downwardDog = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Downward Dog");
+            var childPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Child's Pose");
+            var pigeonPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Pigeon Pose");
+            var hamstringStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hamstring Stretch");
+            var hipFlexorStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Flexor Stretch");
+
+            // Exercise aliases
+            var benchPress = barbellBench;
+            var cableFly = cableCrossover;
+            var barbellCurl = barbellCurlEx;
+            var inclineDumbbellPress = inclineDbPress;
+            var inclineDumbbellFly = dumbbellFly;
+            var dumbbellBenchPress = dbPress;
+            var dumbbellRow = dbRow;
+
+            // Add barbellCurl alias - it was looked up above as barbellCurlVar
+
             // Home exercises
             var wallPushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wall Push-up");
             var kneePushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Knee Push-up");
@@ -1014,68 +1057,9 @@ namespace WorkoutService.Infrastructure.Data
             var sideLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Lunge");
             var skaterHop = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Skater Hop");
 
-            // Additional exercises
-            var inactiveBenchPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Bench Press");
-            var inclineBenchPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Bench Press");
-            var inclineDbPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Dumbbell Press");
-            var dumbbellFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Fly");
-            var cableFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cable Crossover");
-            var barbellRow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Row");
-            var seatedCableRow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Seated Cable Row");
-            var legExtension = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Extension");
-            var walkingLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Walking Lunge");
-            var legCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Curl");
-            var hipThrust = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Thrust");
-            var dumbbellShoulderPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shoulder Press");
-            var frontRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Front Raise");
-            var rearDeltFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Rear Delt Fly");
-            var dumbbellShrug = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shrug");
-            var barbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Curl");
-            var closeGripBench = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Close Grip Bench Press");
-            var inclineDumbbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Dumbbell Curl");
-            var tricepDip = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Tricep Dip");
-            var wristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wrist Curl");
-            var reverseWristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Reverse Wrist Curl");
-            var farmerWalk = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Farmer's Walk");
-            var hangingLegRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hanging Leg Raise");
-            var cableCrunch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cable Crunch");
-            var sidePlank = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Plank");
-            var catCow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cat-Cow Stretch");
-            var downwardDog = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Downward Dog");
-            var childPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Child's Pose");
-            var pigeonPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Pigeon Pose");
-            var hamstringStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hamstring Stretch");
-            var hipFlexorStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Flexor Stretch");
-
             // Exercise aliases for convenience
-            var benchPress = barbellBench;
-            var cableFly = cableCrossover;
-            var legExtension = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Extension");
-            var walkingLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Walking Lunge");
-            var legCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Curl");
-            var frontRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Front Raise");
-            var rearDeltFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Rear Delt Fly");
-            var dumbbellShrug = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shrug");
-            var barbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Curl");
-            var closeGripBench = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Close Grip Bench Press");
-            var inclineDumbbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Dumbbell Curl");
-            var tricepDip = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Tricep Dip");
-            var wristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wrist Curl");
-            var reverseWristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Reverse Wrist Curl");
-            var farmerWalk = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Farmer's Walk");
-            var hangingLegRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hanging Leg Raise");
-            var cableCrunch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cable Crunch");
-            var sidePlank = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Plank");
-            var catCow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cat-Cow Stretch");
-            var downwardDog = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Downward Dog");
-            var childPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Child's Pose");
-            var pigeonPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Pigeon Pose");
-            var hamstringStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hamstring Stretch");
-            var hipFlexorStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Flexor Stretch");
-
-            // Exercise aliases for convenience
-            var benchPress = barbellBench;
-            var cableFly = cableCrossover;
+            benchPress = barbellBench;
+            cableFly = cableCrossover;
 
             // Safety check
             if (planBeginner == null || planNormal == null || pushup == null) return;
