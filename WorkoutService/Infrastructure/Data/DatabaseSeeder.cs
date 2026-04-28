@@ -2095,7 +2095,13 @@ namespace WorkoutService.Infrastructure.Data
         private static async Task SeedSessionsAsync(ApplicationDbContext ctx)
         {
             var adminUserId = Guid.Parse("11111111-2222-3333-4444-555555555555");
-            if (await ctx.WorkoutSessions.AnyAsync(s => s.UserId == adminUserId)) return;
+            
+            var existingSessions = await ctx.WorkoutSessions.Where(s => s.UserId == adminUserId).ToListAsync();
+            if (existingSessions.Any())
+            {
+                ctx.WorkoutSessions.RemoveRange(existingSessions);
+                await ctx.SaveChangesAsync();
+            }
             var workouts = await ctx.Workouts.Take(5).ToListAsync();
             var now = DateTime.UtcNow;
 

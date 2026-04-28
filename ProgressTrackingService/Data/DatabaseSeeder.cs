@@ -12,7 +12,18 @@ namespace ProgressTrackingService.Data
             var ctx = scope.ServiceProvider.GetRequiredService<ProgressDbContext>();
 
             var adminUserId = Guid.Parse("11111111-2222-3333-4444-555555555555");
-            if (await ctx.WeightEntries.AnyAsync(w => w.UserId == adminUserId)) return;
+
+            // Clear existing data for this user to ensure we can re-seed with the new full data
+            var existingWeights = await ctx.WeightEntries.Where(w => w.UserId == adminUserId).ToListAsync();
+            if (existingWeights.Any()) ctx.WeightEntries.RemoveRange(existingWeights);
+            
+            var existingLogs = await ctx.WorkoutLogs.Where(w => w.UserId == adminUserId).ToListAsync();
+            if (existingLogs.Any()) ctx.WorkoutLogs.RemoveRange(existingLogs);
+            
+            var existingStats = await ctx.UserStatistics.Where(s => s.UserId == adminUserId).ToListAsync();
+            if (existingStats.Any()) ctx.UserStatistics.RemoveRange(existingStats);
+
+            await ctx.SaveChangesAsync();
 
             var weightEntries = new List<WeightEntry>();
             var now = DateTimeOffset.UtcNow;
