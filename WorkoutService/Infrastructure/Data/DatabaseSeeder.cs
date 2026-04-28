@@ -49,7 +49,7 @@ namespace WorkoutService.Infrastructure.Data
 
         private static async Task SeedWorkoutPlansAsync(ApplicationDbContext ctx)
         {
-            // If data exists, do nothing
+            // Simply skip if data exists - use database management tool to reseed manually
             if (await ctx.WorkoutPlans.AnyAsync()) return;
 
             var plans = new List<WorkoutPlan>
@@ -1038,8 +1038,6 @@ namespace WorkoutService.Infrastructure.Data
             var dumbbellBenchPress = dbPress;
             var dumbbellRow = dbRow;
 
-            // Add barbellCurl alias - it was looked up above as barbellCurlVar
-
             // Home exercises
             var wallPushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wall Push-up");
             var kneePushup = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Knee Push-up");
@@ -1056,10 +1054,6 @@ namespace WorkoutService.Infrastructure.Data
             var squatJump = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Squat Jump");
             var sideLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Lunge");
             var skaterHop = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Skater Hop");
-
-            // Exercise aliases for convenience
-            benchPress = barbellBench;
-            cableFly = cableCrossover;
 
             // Safety check
             if (planBeginner == null || planNormal == null || pushup == null) return;
