@@ -112,6 +112,10 @@ services:
     image: seifemam/auth-service:latest
     expose:
       - "8080"
+    environment:
+      - UPLOAD_PATH=/app/uploads
+    volumes:
+      - auth_uploads:/app/uploads
     depends_on:
       sqlserver:
         condition: service_healthy
@@ -145,3 +149,4 @@ services:
 volumes:
   sql_data:
   rabbitmq_data:
+  auth_uploads:
