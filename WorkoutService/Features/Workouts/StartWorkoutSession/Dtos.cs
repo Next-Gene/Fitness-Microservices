@@ -4,13 +4,13 @@ namespace WorkoutService.Features.Workouts.StartWorkoutSession.Dtos
 {
     public class StartWorkoutSessionDto
     {
-        [property: JsonPropertyName("difficulty")]
+        [JsonPropertyName("difficulty")]
         public string Difficulty { get; set; }
 
-        [property: JsonPropertyName("plannedDuration")]
+        [JsonPropertyName("plannedDuration")]
         public int PlannedDuration { get; set; }
 
-        [property: JsonPropertyName("userId")]
+        [JsonPropertyName("userId")]
         public Guid UserId { get; set; }
     }
 }

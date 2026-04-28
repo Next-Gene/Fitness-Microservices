@@ -39,6 +39,9 @@ namespace WorkoutService.Infrastructure.Data
 
             // 3. Seed Workouts (Children - depend on Plans and Exercises)
             await SeedWorkoutsAsync(ctx);
+
+            // 4. Seed Workout Sessions for Admin User
+            await SeedSessionsAsync(ctx);
             }
             catch (Exception ex)
             {
@@ -2086,6 +2089,32 @@ namespace WorkoutService.Infrastructure.Data
             };
 
             await ctx.Workouts.AddRangeAsync(workouts);
+            await ctx.SaveChangesAsync();
+        }
+
+        private static async Task SeedSessionsAsync(ApplicationDbContext ctx)
+        {
+            var adminUserId = Guid.Parse("11111111-2222-3333-4444-555555555555");
+            if (await ctx.WorkoutSessions.AnyAsync(s => s.UserId == adminUserId)) return;
+            var workouts = await ctx.Workouts.Take(5).ToListAsync();
+            var now = DateTime.UtcNow;
+
+            var sessions = new List<WorkoutSession>();
+            foreach (var workout in workouts)
+            {
+                sessions.Add(new WorkoutSession
+                {
+                    UserId = adminUserId,
+                    WorkoutId = workout.Id,
+                    Status = "Completed",
+                    StartedAt = now.AddDays(-sessions.Count * 2 - 1),
+                    EndedAt = now.AddDays(-sessions.Count * 2 - 1).AddMinutes(workout.DurationInMinutes),
+                    PlannedDurationInMinutes = workout.DurationInMinutes,
+                    Difficulty = workout.Difficulty
+                });
+            }
+
+            await ctx.WorkoutSessions.AddRangeAsync(sessions);
             await ctx.SaveChangesAsync();
         }
     }

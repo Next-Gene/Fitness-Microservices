@@ -31,13 +31,6 @@ namespace WorkoutService.Features.Workouts.StartWorkoutSession
                 return RequestResponse<WorkoutSessionViewModel>.Fail("User is not authenticated");
             }
 
-            // ✅ 3. Parse User ID from Token (Assuming Auth Service provides Guid)
-            if (!Guid.TryParse(_currentUserService.UserId, out var userId))
-            {
-                // 400 Bad Request if ID format is wrong
-                return RequestResponse<WorkoutSessionViewModel>.Fail("Invalid User ID format in token");
-            }
-
             // 4. Prepare Data
             var startedAt = DateTime.UtcNow;
 
