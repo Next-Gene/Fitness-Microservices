@@ -1,4 +1,4 @@
-﻿using Mapster;
+using Mapster;
 using MediatR;
 using MassTransit; // ✅ Required for Messaging
 using WorkoutService.Contracts; // ✅ Required for Contracts
@@ -41,11 +41,11 @@ namespace WorkoutService.Features.Workouts.StartWorkoutSession
             // 4. Prepare Data
             var startedAt = DateTime.UtcNow;
 
-            // 5. Publish "Fire-and-Forget" Event with REAL User ID
+            // 5. Publish "Fire-and-Forget" Event with User ID from request
             await _publishEndpoint.Publish<IWorkoutSessionStarted>(new
             {
                 WorkoutId = request.WorkoutId,
-                UserId = userId, // ✅ Using the real User ID from Token
+                UserId = request.UserId, // ✅ Using the User ID passed from frontend
                 PlannedDurationMinutes = request.Dto.PlannedDuration,
                 Difficulty = request.Dto.Difficulty,
                 StartedAt = startedAt

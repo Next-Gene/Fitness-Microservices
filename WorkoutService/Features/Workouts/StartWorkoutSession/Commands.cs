@@ -5,5 +5,5 @@ using WorkoutService.Features.Workouts.StartWorkoutSession.ViewModels;
 
 namespace WorkoutService.Features.Workouts.StartWorkoutSession
 {
-    public record StartWorkoutSessionCommand(int WorkoutId, StartWorkoutSessionDto Dto) : IRequest<RequestResponse<WorkoutSessionViewModel>>;
+    public record StartWorkoutSessionCommand(int WorkoutId, Guid UserId, StartWorkoutSessionDto Dto) : IRequest<RequestResponse<WorkoutSessionViewModel>>;
 }
