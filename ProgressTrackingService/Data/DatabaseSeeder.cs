@@ -11,37 +11,53 @@ namespace ProgressTrackingService.Data
             using var scope = serviceProvider.CreateScope();
             var ctx = scope.ServiceProvider.GetRequiredService<ProgressDbContext>();
 
-            if (await ctx.WeightEntries.AnyAsync()) return;
-
             var adminUserId = Guid.Parse("11111111-2222-3333-4444-555555555555");
+            if (await ctx.WeightEntries.AnyAsync(w => w.UserId == adminUserId)) return;
 
-            var weightEntries = new List<WeightEntry>
+            var weightEntries = new List<WeightEntry>();
+            var now = DateTimeOffset.UtcNow;
+            
+            // 3 months of weekly weight entries
+            for (int i = 90; i >= 0; i -= 7)
             {
-                new() { UserId = adminUserId, WeightKg = 120, LoggedAt = DateTimeOffset.UtcNow.AddMonths(-3) },
-                new() { UserId = adminUserId, WeightKg = 118, LoggedAt = DateTimeOffset.UtcNow.AddDays(-90) },
-                new() { UserId = adminUserId, WeightKg = 115, LoggedAt = DateTimeOffset.UtcNow.AddDays(-60) },
-                new() { UserId = adminUserId, WeightKg = 112, LoggedAt = DateTimeOffset.UtcNow.AddDays(-30) },
-                new() { UserId = adminUserId, WeightKg = 110, LoggedAt = DateTimeOffset.UtcNow.AddDays(-15) },
-                new() { UserId = adminUserId, WeightKg = 108, LoggedAt = DateTimeOffset.UtcNow.AddDays(-7) },
-                new() { UserId = adminUserId, WeightKg = 106, LoggedAt = DateTimeOffset.UtcNow.AddDays(-3) },
-                new() { UserId = adminUserId, WeightKg = 105, LoggedAt = DateTimeOffset.UtcNow }
-            };
+                weightEntries.Add(new WeightEntry { 
+                    UserId = adminUserId, 
+                    WeightKg = 120 - (90 - i) * 0.16f, // Smooth decline from 120 to ~105
+                    LoggedAt = now.AddDays(-i) 
+                });
+            }
 
-            var workoutLogs = new List<WorkoutLog>
+            var workoutLogs = new List<WorkoutLog>();
+            // 20 workout logs over the last 30 days
+            var random = new Random();
+            for (int i = 30; i >= 1; i--)
             {
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 30, CaloriesBurned = 250, PerformedAt = DateTimeOffset.UtcNow.AddDays(-15), Rating = 4 },
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 45, CaloriesBurned = 350, PerformedAt = DateTimeOffset.UtcNow.AddDays(-13), Rating = 5 },
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 40, CaloriesBurned = 300, PerformedAt = DateTimeOffset.UtcNow.AddDays(-10), Rating = 4 },
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 50, CaloriesBurned = 400, PerformedAt = DateTimeOffset.UtcNow.AddDays(-8), Rating = 5 },
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 35, CaloriesBurned = 280, PerformedAt = DateTimeOffset.UtcNow.AddDays(-6), Rating = 4 },
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 60, CaloriesBurned = 450, PerformedAt = DateTimeOffset.UtcNow.AddDays(-4), Rating = 5 },
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 45, CaloriesBurned = 350, PerformedAt = DateTimeOffset.UtcNow.AddDays(-2), Rating = 4 },
-                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 55, CaloriesBurned = 420, PerformedAt = DateTimeOffset.UtcNow.AddDays(-1), Rating = 5 }
-            };
+                if (i % 2 == 0 || i % 3 == 0) // Roughly 4-5 workouts per week
+                {
+                    workoutLogs.Add(new WorkoutLog { 
+                        UserId = adminUserId, 
+                        WorkoutId = Guid.NewGuid(), 
+                        SessionId = Guid.NewGuid(), 
+                        DurationMinutes = random.Next(30, 65), 
+                        CaloriesBurned = random.Next(250, 550), 
+                        PerformedAt = now.AddDays(-i).AddHours(random.Next(8, 20)), 
+                        Rating = random.Next(3, 6) 
+                    });
+                }
+            }
 
             var statistics = new List<UserStatistics>
             {
-                new() { UserId = adminUserId, TotalWorkouts = 8, TotalCaloriesBurned = 2800, CurrentWeight = 105, StartingWeight = 120, LastWorkoutAt = DateTimeOffset.UtcNow.AddDays(-1), CurrentStreak = 3, LongestStreak = 5 }
+                new() { 
+                    UserId = adminUserId, 
+                    TotalWorkouts = workoutLogs.Count, 
+                    TotalCaloriesBurned = workoutLogs.Sum(l => l.CaloriesBurned), 
+                    CurrentWeight = 105.6f, 
+                    StartingWeight = 120, 
+                    LastWorkoutAt = now.AddDays(-1), 
+                    CurrentStreak = 4, 
+                    LongestStreak = 7 
+                }
             };
 
             await ctx.WeightEntries.AddRangeAsync(weightEntries);
