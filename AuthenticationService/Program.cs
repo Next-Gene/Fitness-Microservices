@@ -1,4 +1,4 @@
-﻿using AuthenticationService.Contarcts;
+using AuthenticationService.Contarcts;
 using AuthenticationService.Data.Seed;
 using AuthenticationService.Models;
 using AuthenticationService.Repositories;
@@ -147,6 +147,7 @@ namespace AuthenticationService
 
             // app.UseHttpsRedirection(); // Disabled: no HTTPS cert in Docker
             
+            app.UseStaticFiles(); // Enable serving uploaded images
             app.UseCors("AllowAll"); // CORS first
             
             app.UseAuthentication();

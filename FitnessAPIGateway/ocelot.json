@@ -1,6 +1,23 @@
 {
   "Routes": [
     // ==========================================
+    // 0. Static Files (Uploads)
+    // ==========================================
+    {
+      "DownstreamPathTemplate": "/Uploads/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authenticationservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/Uploads/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    // ==========================================
     // 1. Authentication Service (api/auth/*)
     //    Internal: api/auth/* ✅ Already correct
     // ==========================================

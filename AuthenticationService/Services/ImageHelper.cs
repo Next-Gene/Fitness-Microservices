@@ -1,4 +1,4 @@
-﻿using AuthenticationService.Contarcts;
+using AuthenticationService.Contarcts;
 
 namespace AuthenticationService.Services
 {
@@ -47,7 +47,8 @@ namespace AuthenticationService.Services
             if (request == null)
                 return "/" + relativePath;             
 
-            var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
+            // Always point to the API Gateway for external access
+            var baseUrl = $"http://localhost:8088";
             return $"{baseUrl}/{relativePath}";
         }
 
