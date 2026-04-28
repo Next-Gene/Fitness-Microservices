@@ -9,5 +9,8 @@ namespace WorkoutService.Features.Workouts.StartWorkoutSession.Dtos
 
         [property: JsonPropertyName("plannedDuration")]
         public int PlannedDuration { get; set; }
+
+        [property: JsonPropertyName("userId")]
+        public Guid UserId { get; set; }
     }
 }

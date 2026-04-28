@@ -36,7 +36,7 @@ namespace WorkoutService.Features.Workouts.StartWorkoutSession
 
         private static async Task<IResult> HandleStartWorkout(IMediator mediator, int id, StartWorkoutSessionDto dto)
         {
-            var command = new StartWorkoutSessionCommand(id, dto);
+            var command = new StartWorkoutSessionCommand(id, dto.UserId, dto);
             var result = await mediator.Send(command);
 
             if (!result.IsSuccess)
