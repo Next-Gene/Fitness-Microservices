@@ -55,6 +55,8 @@ namespace WorkoutService.Features.Workouts.GetWorkoutDetails
                     CaloriesBurn = w.CaloriesBurn,
                     IsPremium = w.IsPremium,
                     Rating = w.Rating,
+                    ImageUrl = w.ImageUrl ?? "",
+                    VideoUrl = w.VideoUrl ?? "",
                     Exercises = w.WorkoutExercises
                         .OrderBy(we => we.Order) 
                         .Select(we => new ExerciseViewModel

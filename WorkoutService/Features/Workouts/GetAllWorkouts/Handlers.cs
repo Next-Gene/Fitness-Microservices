@@ -65,7 +65,9 @@ namespace WorkoutService.Features.Workouts.GetAllWorkouts
                     IsPremium = w.IsPremium,
                     Rating = w.Rating,
                     Description = w.Description,
-                    TotalRatings = w.TotalRatings
+                    TotalRatings = w.TotalRatings,
+                    ImageUrl = w.ImageUrl ?? "",
+                    VideoUrl = w.VideoUrl ?? ""
                 });
 
                 var totalCount = await query.CountAsync(cancellationToken);

@@ -817,6 +817,124 @@ namespace WorkoutService.Infrastructure.Data
                     Difficulty = "Intermediate",
                     TargetMuscles = new List<string> { "Cardio", "Full Body" },
                     EquipmentNeeded = new List<string> { "Bodyweight" }
+                },
+
+                // Flexibility exercises
+                new() {
+                    Name = "Cat-Cow Stretch",
+                    Description = "Yoga pose for spine flexibility.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Spine", "Core" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Downward Dog",
+                    Description = "Classic yoga pose for full body stretch.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Hamstrings", "Shoulders", "Calves" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Child's Pose",
+                    Description = "Restorative yoga pose.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Back", "Hips" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Pigeon Pose",
+                    Description = "Deep hip opener yoga pose.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Hips", "Glutes" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Hamstring Stretch",
+                    Description = "Seated hamstring stretch.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Hamstrings" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+                new() {
+                    Name = "Hip Flexor Stretch",
+                    Description = "Kneeling hip flexor stretch.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Hip Flexors", "Quads" },
+                    EquipmentNeeded = new List<string> { "None" }
+                },
+
+                // Additional arms exercises
+                new() {
+                    Name = "Barbell Curl",
+                    Description = "Classic bicep builder.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Biceps" },
+                    EquipmentNeeded = new List<string> { "Barbell" }
+                },
+                new() {
+                    Name = "Close Grip Bench Press",
+                    Description = "Tricep focused bench press.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Triceps", "Chest" },
+                    EquipmentNeeded = new List<string> { "Barbell", "Bench" }
+                },
+                new() {
+                    Name = "Incline Dumbbell Curl",
+                    Description = "Bicep curl on incline bench.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Biceps" },
+                    EquipmentNeeded = new List<string> { "Dumbbells", "Bench" }
+                },
+                new() {
+                    Name = "Tricep Dip",
+                    Description = "Parallel bar dip for triceps.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Triceps" },
+                    EquipmentNeeded = new List<string> { "Dip Bars" }
+                },
+                new() {
+                    Name = "Wrist Curl",
+                    Description = "Forearm wirst flexor exercise.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Forearms" },
+                    EquipmentNeeded = new List<string> { "Dumbbell" }
+                },
+                new() {
+                    Name = "Reverse Wrist Curl",
+                    Description = "Forearm wrist extensor exercise.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Forearms" },
+                    EquipmentNeeded = new List<string> { "Dumbbell" }
+                },
+                new() {
+                    Name = "Farmer's Walk",
+                    Description = "Grip and core strength exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Forearms", "Core", "Traps" },
+                    EquipmentNeeded = new List<string> { "Dumbbells" }
+                },
+
+                // Additional core exercises
+                new() {
+                    Name = "Hanging Leg Raise",
+                    Description = "Advanced lower ab exercise.",
+                    Difficulty = "Advanced",
+                    TargetMuscles = new List<string> { "Lower Abs", "Hip Flexors" },
+                    EquipmentNeeded = new List<string> { "Pull-up Bar" }
+                },
+                new() {
+                    Name = "Cable Crunch",
+                    Description = "Weighted ab exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Abs" },
+                    EquipmentNeeded = new List<string> { "Cable Machine" }
+                },
+                new() {
+                    Name = "Side Plank",
+                    Description = "Oblique strength exercise.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Obliques", "Core" },
+                    EquipmentNeeded = new List<string> { "None" }
                 }
             };
 
@@ -835,9 +953,12 @@ namespace WorkoutService.Infrastructure.Data
             var planFitAdvanced = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_fit_advanced");
             var planLwEasy = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_lw_easy");
             var planLwHard = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_lw_hard");
+            var planLwIntermediate = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_lw_normal");
             var planGwBeginner = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_gw_beginner");
+            var planGwHard = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_gw_hard");
             var planStAdvanced = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_st_advanced");
             var planFlexBeginner = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_flex_beginner");
+            var planFlexIntermediate = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_flex_intermediate");
             var planEndIntermediate = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_end_intermediate");
             var planBodyAdvanced = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_body_advanced");
             var planRecActive = await ctx.WorkoutPlans.FirstOrDefaultAsync(p => p.ExternalPlanId == "plan_rec_active");
@@ -893,6 +1014,69 @@ namespace WorkoutService.Infrastructure.Data
             var sideLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Lunge");
             var skaterHop = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Skater Hop");
 
+            // Additional exercises
+            var inactiveBenchPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Bench Press");
+            var inclineBenchPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Bench Press");
+            var inclineDbPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Dumbbell Press");
+            var dumbbellFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Fly");
+            var cableFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cable Crossover");
+            var barbellRow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Row");
+            var seatedCableRow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Seated Cable Row");
+            var legExtension = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Extension");
+            var walkingLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Walking Lunge");
+            var legCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Curl");
+            var hipThrust = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Thrust");
+            var dumbbellShoulderPress = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shoulder Press");
+            var frontRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Front Raise");
+            var rearDeltFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Rear Delt Fly");
+            var dumbbellShrug = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shrug");
+            var barbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Curl");
+            var closeGripBench = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Close Grip Bench Press");
+            var inclineDumbbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Dumbbell Curl");
+            var tricepDip = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Tricep Dip");
+            var wristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wrist Curl");
+            var reverseWristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Reverse Wrist Curl");
+            var farmerWalk = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Farmer's Walk");
+            var hangingLegRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hanging Leg Raise");
+            var cableCrunch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cable Crunch");
+            var sidePlank = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Plank");
+            var catCow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cat-Cow Stretch");
+            var downwardDog = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Downward Dog");
+            var childPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Child's Pose");
+            var pigeonPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Pigeon Pose");
+            var hamstringStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hamstring Stretch");
+            var hipFlexorStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Flexor Stretch");
+
+            // Exercise aliases for convenience
+            var benchPress = barbellBench;
+            var cableFly = cableCrossover;
+            var legExtension = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Extension");
+            var walkingLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Walking Lunge");
+            var legCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Leg Curl");
+            var frontRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Front Raise");
+            var rearDeltFly = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Rear Delt Fly");
+            var dumbbellShrug = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Dumbbell Shrug");
+            var barbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Barbell Curl");
+            var closeGripBench = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Close Grip Bench Press");
+            var inclineDumbbellCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Incline Dumbbell Curl");
+            var tricepDip = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Tricep Dip");
+            var wristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Wrist Curl");
+            var reverseWristCurl = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Reverse Wrist Curl");
+            var farmerWalk = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Farmer's Walk");
+            var hangingLegRaise = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hanging Leg Raise");
+            var cableCrunch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cable Crunch");
+            var sidePlank = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Plank");
+            var catCow = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Cat-Cow Stretch");
+            var downwardDog = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Downward Dog");
+            var childPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Child's Pose");
+            var pigeonPose = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Pigeon Pose");
+            var hamstringStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hamstring Stretch");
+            var hipFlexorStretch = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Hip Flexor Stretch");
+
+            // Exercise aliases for convenience
+            var benchPress = barbellBench;
+            var cableFly = cableCrossover;
+
             // Safety check
             if (planBeginner == null || planNormal == null || pushup == null) return;
 
@@ -906,7 +1090,9 @@ namespace WorkoutService.Infrastructure.Data
                     DurationInMinutes = 20,
                     CaloriesBurn = 150,
                     IsPremium = false,
-                    Rating = 0,
+                    Rating = 4.3,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f3cb?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=UBMk30rjy0o",
                     // Use the Object Reference, NOT ID
                     WorkoutPlan = planBeginner,
                     WorkoutExercises = new List<WorkoutExercise>
@@ -925,7 +1111,9 @@ namespace WorkoutService.Infrastructure.Data
                     DurationInMinutes = 45,
                     CaloriesBurn = 350,
                     IsPremium = false,
-                    Rating = 0,
+                    Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1534258936925-c48947b6bfc8?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=1F6B2NfF5j0",
                     WorkoutPlan = planNormal,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -944,6 +1132,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 450,
                     IsPremium = true,
                     Rating = 5,
+                    ImageUrl = "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=r4x9uqzmyGg",
                     WorkoutPlan = planStAdvanced,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -962,6 +1152,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 400,
                     IsPremium = false,
                     Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1598971639058-31133c0a4829?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=E4-A6Iy-UEE",
                     WorkoutPlan = planFitIntermediate,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -980,6 +1172,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 600,
                     IsPremium = true,
                     Rating = 5,
+                    ImageUrl = "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=D7KaRcUTQeE",
                     WorkoutPlan = planLwHard,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -999,6 +1193,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 300,
                     IsPremium = false,
                     Rating = 4,
+                    ImageUrl = "https://images.unsplash.com/photo-1598974634556-0745d4d4d8f6?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=3UWNMFEKUg0",
                     WorkoutPlan = planFitIntermediate,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1016,6 +1212,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 250,
                     IsPremium = false,
                     Rating = 4.2,
+                    ImageUrl = "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=6Z15lY_lDwg",
                     WorkoutPlan = planGwBeginner,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1034,6 +1232,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 100,
                     IsPremium = false,
                     Rating = 4.8,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=ASdvN_XEl_o",
                     WorkoutPlan = planFitIntermediate,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1051,6 +1251,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 300,
                     IsPremium = true,
                     Rating = 4.9,
+                    ImageUrl = "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=ml6cT4AZdqI",
                     WorkoutPlan = planEndIntermediate,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1069,6 +1271,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 200,
                     IsPremium = false,
                     Rating = 4.3,
+                    ImageUrl = "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=IODxDxX7oi4",
                     WorkoutPlan = planBeginner,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1087,6 +1291,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 500,
                     IsPremium = true,
                     Rating = 5,
+                    ImageUrl = "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=MeIiIdhvXT4",
                     WorkoutPlan = planBodyAdvanced,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1105,6 +1311,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 100,
                     IsPremium = false,
                     Rating = 4.7,
+                    ImageUrl = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=v7AYKMP6rOE",
                     WorkoutPlan = planFlexBeginner,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1122,6 +1330,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 100,
                     IsPremium = false,
                     Rating = 4.6,
+                    ImageUrl = "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=HQDYp7W5G4Q",
                     WorkoutPlan = planRecActive,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1141,6 +1351,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 200,
                     IsPremium = false,
                     Rating = 4.7,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=BHeAkmrQ6W8",
                     WorkoutPlan = planHomeBeginner,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1160,6 +1372,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 80,
                     IsPremium = false,
                     Rating = 4.8,
+                    ImageUrl = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=7Jq0R4K1e7U",
                     WorkoutPlan = planHomeBeginner,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1178,6 +1392,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 350,
                     IsPremium = false,
                     Rating = 4.9,
+                    ImageUrl = "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=ml6cT4AZdqI",
                     WorkoutPlan = planHomeHiit,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1197,6 +1413,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 120,
                     IsPremium = false,
                     Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=UBMk30rjy0o",
                     WorkoutPlan = planQuick15,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1215,6 +1433,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 130,
                     IsPremium = false,
                     Rating = 4.6,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=1f8yoFFdkcY",
                     WorkoutPlan = planHomeBeginner,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1234,6 +1454,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 450,
                     IsPremium = true,
                     Rating = 5,
+                    ImageUrl = "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=ECJ0Cj1WbgM",
                     WorkoutPlan = planHomeIntermediate,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1253,6 +1475,8 @@ namespace WorkoutService.Infrastructure.Data
                     CaloriesBurn = 280,
                     IsPremium = false,
                     Rating = 4.7,
+                    ImageUrl = "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=D7KaRcUTQeE",
                     WorkoutPlan = planHomeIntermediate,
                     WorkoutExercises = new List<WorkoutExercise>
                     {
@@ -1261,6 +1485,533 @@ namespace WorkoutService.Infrastructure.Data
                         new() { Exercise = gluteBridge, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
                         new() { Exercise = wallSit, Order = 4, Sets = 3, Reps = "30s", RestTimeInSeconds = 45 },
                         new() { Exercise = sideLunge, Order = 5, Sets = 3, Reps = "12 each side", RestTimeInSeconds = 30 }
+                    }
+                },
+
+                // ===== ADDITIONAL CHEST WORKOUTS =====
+                new() {
+                    Name = "Chest Pump Special",
+                    Description = "Intense chest workout for maximum pump.",
+                    Category = "chest",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 35,
+                    CaloriesBurn = 280,
+                    IsPremium = false,
+                    Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=r1Au3S9B6eQ",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = benchPress, Order = 1, Sets = 4, Reps = "8-10", RestTimeInSeconds = 90 },
+                        new() { Exercise = inclineBenchPress, Order = 2, Sets = 3, Reps = "10-12", RestTimeInSeconds = 75 },
+                        new() { Exercise = cableFly, Order = 3, Sets = 3, Reps = "12-15", RestTimeInSeconds = 60 },
+                        new() { Exercise = pushup, Order = 4, Sets = 3, Reps = "15-20", RestTimeInSeconds = 60 }
+                    }
+                },
+                new() {
+                    Name = "Incline Chest Builder",
+                    Description = "Focus on upper chest development.",
+                    Category = "chest",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 30,
+                    CaloriesBurn = 220,
+                    IsPremium = false,
+                    Rating = 4.4,
+                    ImageUrl = "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=8iPEnn-ltC8",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = inclineBenchPress, Order = 1, Sets = 4, Reps = "8-12", RestTimeInSeconds = 75 },
+                        new() { Exercise = inclineDumbbellPress, Order = 2, Sets = 3, Reps = "10-12", RestTimeInSeconds = 75 },
+                        new() { Exercise = inclineDumbbellFly, Order = 3, Sets = 3, Reps = "12-15", RestTimeInSeconds = 60 }
+                    }
+                },
+                new() {
+                    Name = "Dumbbell Chest Workout",
+                    Description = "Complete dumbbell chest routine.",
+                    Category = "chest",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 25,
+                    CaloriesBurn = 180,
+                    IsPremium = false,
+                    Rating = 4.6,
+                    ImageUrl = "https://images.unsplash.com/photo-1598971639058-31133c0a4829?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=VmB1G1K7v94",
+                    WorkoutPlan = planFitBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = dumbbellBenchPress, Order = 1, Sets = 3, Reps = "10-12", RestTimeInSeconds = 60 },
+                        new() { Exercise = dumbbellFly, Order = 2, Sets = 3, Reps = "12-15", RestTimeInSeconds = 60 },
+                        new() { Exercise = pushup, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 45 }
+                    }
+                },
+
+                // ===== ADDITIONAL BACK WORKOUTS =====
+                new() {
+                    Name = "V-Taper Back Blast",
+                    Description = "Build a wide, impressive back.",
+                    Category = "back",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 40,
+                    CaloriesBurn = 300,
+                    IsPremium = false,
+                    Rating = 4.6,
+                    ImageUrl = "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=7j-2w4-P14I",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = pullup, Order = 1, Sets = 4, Reps = "8-12", RestTimeInSeconds = 90 },
+                        new() { Exercise = latPulldown, Order = 2, Sets = 4, Reps = "10-12", RestTimeInSeconds = 75 },
+                        new() { Exercise = barbellRow, Order = 3, Sets = 3, Reps = "10", RestTimeInSeconds = 75 },
+                        new() { Exercise = seatedCableRow, Order = 4, Sets = 3, Reps = "12", RestTimeInSeconds = 60 }
+                    }
+                },
+                new() {
+                    Name = "Deadlift Focused Back",
+                    Description = "Heavy pulls for back thickness.",
+                    Category = "back",
+                    Difficulty = "Advanced",
+                    DurationInMinutes = 45,
+                    CaloriesBurn = 400,
+                    IsPremium = true,
+                    Rating = 4.8,
+                    ImageUrl = "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=op9kVnSso6Q",
+                    WorkoutPlan = planGwHard,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = deadlift, Order = 1, Sets = 5, Reps = "5", RestTimeInSeconds = 120 },
+                        new() { Exercise = barbellRow, Order = 2, Sets = 4, Reps = "8", RestTimeInSeconds = 90 },
+                        new() { Exercise = rdl, Order = 3, Sets = 3, Reps = "10", RestTimeInSeconds = 75 }
+                    }
+                },
+                new() {
+                    Name = "Beginner Back Basics",
+                    Description = "Perfect for building back strength.",
+                    Category = "back",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 25,
+                    CaloriesBurn = 180,
+                    IsPremium = false,
+                    Rating = 4.4,
+                    ImageUrl = "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=FXQogg7U2iI",
+                    WorkoutPlan = planFitBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = latPulldown, Order = 1, Sets = 3, Reps = "12", RestTimeInSeconds = 60 },
+                        new() { Exercise = seatedCableRow, Order = 2, Sets = 3, Reps = "12", RestTimeInSeconds = 60 },
+                        new() { Exercise = dumbbellRow, Order = 3, Sets = 3, Reps = "12 each side", RestTimeInSeconds = 60 }
+                    }
+                },
+
+                // ===== ADDITIONAL LEGS WORKOUTS =====
+                new() {
+                    Name = "Quad Destroyer",
+                    Description = "Intense quad focused workout.",
+                    Category = "legs",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 40,
+                    CaloriesBurn = 350,
+                    IsPremium = false,
+                    Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=D7KaRcUTQeE",
+                    WorkoutPlan = planLwIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = barbellSquat, Order = 1, Sets = 4, Reps = "8-10", RestTimeInSeconds = 90 },
+                        new() { Exercise = legPress, Order = 2, Sets = 4, Reps = "12", RestTimeInSeconds = 75 },
+                        new() { Exercise = legExtension, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 60 },
+                        new() { Exercise = walkingLunge, Order = 4, Sets = 3, Reps = "12 each leg", RestTimeInSeconds = 60 }
+                    }
+                },
+                new() {
+                    Name = "Hamstring & Glute Focus",
+                    Description = "Build posterior chain strength.",
+                    Category = "legs",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 35,
+                    CaloriesBurn = 300,
+                    IsPremium = false,
+                    Rating = 4.6,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=3UM8RHpZwT4",
+                    WorkoutPlan = planLwIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = rdl, Order = 1, Sets = 4, Reps = "10", RestTimeInSeconds = 75 },
+                        new() { Exercise = legCurl, Order = 2, Sets = 4, Reps = "12", RestTimeInSeconds = 60 },
+                        new() { Exercise = gluteBridge, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 45 },
+                        new() { Exercise = hipThrust, Order = 4, Sets = 3, Reps = "12", RestTimeInSeconds = 60 }
+                    }
+                },
+                new() {
+                    Name = "Leg Day for Beginners",
+                    Description = "Start your leg training journey.",
+                    Category = "legs",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 25,
+                    CaloriesBurn = 200,
+                    IsPremium = false,
+                    Rating = 4.3,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=QOVaHwm-Q6U",
+                    WorkoutPlan = planFitBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = squat, Order = 1, Sets = 3, Reps = "12", RestTimeInSeconds = 60 },
+                        new() { Exercise = lunge, Order = 2, Sets = 3, Reps = "10 each leg", RestTimeInSeconds = 60 },
+                        new() { Exercise = gluteBridge, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 45 }
+                    }
+                },
+
+                // ===== ADDITIONAL SHOULDERS WORKOUTS =====
+                new() {
+                    Name = "Shoulder Strength Builder",
+                    Description = "Build strong, defined shoulders.",
+                    Category = "shoulders",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 35,
+                    CaloriesBurn = 250,
+                    IsPremium = false,
+                    Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1598974634556-0745d4d4d8f6?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=3UWNMFEKUg0",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = overheadPress, Order = 1, Sets = 4, Reps = "8-10", RestTimeInSeconds = 75 },
+                        new() { Exercise = dumbbellShoulderPress, Order = 2, Sets = 3, Reps = "10-12", RestTimeInSeconds = 60 },
+                        new() { Exercise = lateralRaise, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 45 },
+                        new() { Exercise = facePull, Order = 4, Sets = 3, Reps = "20", RestTimeInSeconds = 45 }
+                    }
+                },
+                new() {
+                    Name = "Delts & Traps Session",
+                    Description = "Build impressive deltoids and traps.",
+                    Category = "shoulders",
+                    Difficulty = "Advanced",
+                    DurationInMinutes = 40,
+                    CaloriesBurn = 300,
+                    IsPremium = true,
+                    Rating = 4.7,
+                    ImageUrl = "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=2VvJrqy2vT0",
+                    WorkoutPlan = planFitAdvanced,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = overheadPress, Order = 1, Sets = 5, Reps = "6-8", RestTimeInSeconds = 90 },
+                        new() { Exercise = dumbbellShrug, Order = 2, Sets = 4, Reps = "12", RestTimeInSeconds = 60 },
+                        new() { Exercise = lateralRaise, Order = 3, Sets = 4, Reps = "15", RestTimeInSeconds = 45 },
+                        new() { Exercise = rearDeltFly, Order = 4, Sets = 3, Reps = "15", RestTimeInSeconds = 45 }
+                    }
+                },
+                new() {
+                    Name = "Quick Shoulder Burn",
+                    Description = "Fast shoulder workout for busy days.",
+                    Category = "shoulders",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 20,
+                    CaloriesBurn = 150,
+                    IsPremium = false,
+                    Rating = 4.2,
+                    ImageUrl = "https://images.unsplash.com/photo-1534258936925-c48947b6bfc8?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=VY1d3c2Y6qI",
+                    WorkoutPlan = planFitBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = overheadPress, Order = 1, Sets = 3, Reps = "10", RestTimeInSeconds = 60 },
+                        new() { Exercise = lateralRaise, Order = 2, Sets = 3, Reps = "15", RestTimeInSeconds = 45 },
+                        new() { Exercise = frontRaise, Order = 3, Sets = 3, Reps = "12", RestTimeInSeconds = 45 }
+                    }
+                },
+
+                // ===== ADDITIONAL ARMS WORKOUTS =====
+                new() {
+                    Name = "Bicep & Tricep Superset",
+                    Description = "Maximum arm pump with supersets.",
+                    Category = "arms",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 30,
+                    CaloriesBurn = 220,
+                    IsPremium = false,
+                    Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=6Z15lY_lDwg",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = bicepCurl, Order = 1, Sets = 4, Reps = "10-12", RestTimeInSeconds = 45 },
+                        new() { Exercise = tricepPushdown, Order = 2, Sets = 4, Reps = "12", RestTimeInSeconds = 45 },
+                        new() { Exercise = hammerCurl, Order = 3, Sets = 3, Reps = "12", RestTimeInSeconds = 45 },
+                        new() { Exercise = skullCrusher, Order = 4, Sets = 3, Reps = "12", RestTimeInSeconds = 60 }
+                    }
+                },
+                new() {
+                    Name = "Forearm Strengthener",
+                    Description = "Build crushing grip strength.",
+                    Category = "arms",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 20,
+                    CaloriesBurn = 120,
+                    IsPremium = false,
+                    Rating = 4.1,
+                    ImageUrl = "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=5hL-6z76QwU",
+                    WorkoutPlan = planFitBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = wristCurl, Order = 1, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = reverseWristCurl, Order = 2, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = farmerWalk, Order = 3, Sets = 3, Reps = "30s", RestTimeInSeconds = 45 }
+                    }
+                },
+                new() {
+                    Name = "Massive Arms Routine",
+                    Description = "Build big arms with heavy compounds.",
+                    Category = "arms",
+                    Difficulty = "Advanced",
+                    DurationInMinutes = 45,
+                    CaloriesBurn = 300,
+                    IsPremium = true,
+                    Rating = 4.8,
+                    ImageUrl = "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=zwrT6XZ7m7Q",
+                    WorkoutPlan = planGwHard,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = barbellCurl, Order = 1, Sets = 4, Reps = "8-10", RestTimeInSeconds = 60 },
+                        new() { Exercise = closeGripBench, Order = 2, Sets = 4, Reps = "8-10", RestTimeInSeconds = 75 },
+                        new() { Exercise = inclineDumbbellCurl, Order = 3, Sets = 3, Reps = "10-12", RestTimeInSeconds = 60 },
+                        new() { Exercise = tricepDip, Order = 4, Sets = 3, Reps = "10-12", RestTimeInSeconds = 60 }
+                    }
+                },
+
+                // ===== ADDITIONAL CORE WORKOUTS =====
+                new() {
+                    Name = "Ab Burnout",
+                    Description = "Intense core burning session.",
+                    Category = "stomach",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 20,
+                    CaloriesBurn = 150,
+                    IsPremium = false,
+                    Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=ASdvN_XEl_o",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = legRaise, Order = 1, Sets = 4, Reps = "15", RestTimeInSeconds = 45 },
+                        new() { Exercise = russianTwist, Order = 2, Sets = 4, Reps = "20 each side", RestTimeInSeconds = 45 },
+                        new() { Exercise = plank, Order = 3, Sets = 3, Reps = "60s", RestTimeInSeconds = 60 },
+                        new() { Exercise = bicycleCrunch, Order = 4, Sets = 3, Reps = "25", RestTimeInSeconds = 45 }
+                    }
+                },
+                new() {
+                    Name = "6-Pack Builder",
+                    Description = "Sculpt your abs with this routine.",
+                    Category = "stomach",
+                    Difficulty = "Advanced",
+                    DurationInMinutes = 25,
+                    CaloriesBurn = 180,
+                    IsPremium = true,
+                    Rating = 4.7,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=pZ9u6a5f4pQ",
+                    WorkoutPlan = planFitAdvanced,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = hangingLegRaise, Order = 1, Sets = 4, Reps = "12", RestTimeInSeconds = 60 },
+                        new() { Exercise = abWheel, Order = 2, Sets = 4, Reps = "15", RestTimeInSeconds = 60 },
+                        new() { Exercise = cableCrunch, Order = 3, Sets = 3, Reps = "20", RestTimeInSeconds = 45 },
+                        new() { Exercise = plank, Order = 4, Sets = 3, Reps = "90s", RestTimeInSeconds = 60 }
+                    }
+                },
+                new() {
+                    Name = "Core & Obliques",
+                    Description = "Target your entire midsection.",
+                    Category = "stomach",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 18,
+                    CaloriesBurn = 130,
+                    IsPremium = false,
+                    Rating = 4.4,
+                    ImageUrl = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=aqX0Jb1zFgk",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = russianTwist, Order = 1, Sets = 3, Reps = "30 each side", RestTimeInSeconds = 45 },
+                        new() { Exercise = sidePlank, Order = 2, Sets = 3, Reps = "30s each side", RestTimeInSeconds = 45 },
+                        new() { Exercise = deadBug, Order = 3, Sets = 3, Reps = "12 each side", RestTimeInSeconds = 45 }
+                    }
+                },
+
+                // ===== ADDITIONAL FLEXIBILITY WORKOUTS =====
+                new() {
+                    Name = "Morning Yoga Flow",
+                    Description = "Start your day with gentle yoga.",
+                    Category = "flexibility",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 25,
+                    CaloriesBurn = 100,
+                    IsPremium = false,
+                    Rating = 4.8,
+                    ImageUrl = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=v7AYKMP6rOE",
+                    WorkoutPlan = planFlexBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = catCow, Order = 1, Sets = 1, Reps = "5 breaths", RestTimeInSeconds = 15 },
+                        new() { Exercise = downwardDog, Order = 2, Sets = 1, Reps = "5 breaths", RestTimeInSeconds = 15 },
+                        new() { Exercise = childPose, Order = 3, Sets = 1, Reps = "5 breaths", RestTimeInSeconds = 15 }
+                    }
+                },
+                new() {
+                    Name = "Deep Stretch Session",
+                    Description = "Improve your flexibility significantly.",
+                    Category = "flexibility",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 35,
+                    CaloriesBurn = 120,
+                    IsPremium = false,
+                    Rating = 4.6,
+                    ImageUrl = "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=sTanfQ2B_wQ",
+                    WorkoutPlan = planFlexIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = pigeonPose, Order = 1, Sets = 1, Reps = "2 minutes each side", RestTimeInSeconds = 30 },
+                        new() { Exercise = hamstringStretch, Order = 2, Sets = 1, Reps = "2 minutes", RestTimeInSeconds = 30 },
+                        new() { Exercise = hipFlexorStretch, Order = 3, Sets = 1, Reps = "2 minutes each side", RestTimeInSeconds = 30 }
+                    }
+                },
+
+                // ===== ADDITIONAL FULL BODY WORKOUTS =====
+                new() {
+                    Name = "Full Body Strength",
+                    Description = "Complete strength training routine.",
+                    Category = "full-body",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 45,
+                    CaloriesBurn = 350,
+                    IsPremium = false,
+                    Rating = 4.6,
+                    ImageUrl = "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=IODxDxX7oi4",
+                    WorkoutPlan = planFitIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = barbellSquat, Order = 1, Sets = 4, Reps = "8", RestTimeInSeconds = 90 },
+                        new() { Exercise = benchPress, Order = 2, Sets = 4, Reps = "8", RestTimeInSeconds = 90 },
+                        new() { Exercise = barbellRow, Order = 3, Sets = 4, Reps = "10", RestTimeInSeconds = 75 },
+                        new() { Exercise = overheadPress, Order = 4, Sets = 3, Reps = "10", RestTimeInSeconds = 75 }
+                    }
+                },
+                new() {
+                    Name = "Metabolic Conditioning",
+                    Description = "Boost your metabolism with this circuit.",
+                    Category = "full-body",
+                    Difficulty = "Advanced",
+                    DurationInMinutes = 30,
+                    CaloriesBurn = 400,
+                    IsPremium = true,
+                    Rating = 4.8,
+                    ImageUrl = "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=ml6cT4AZdqI",
+                    WorkoutPlan = planLwHard,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = burpee, Order = 1, Sets = 4, Reps = "45s", RestTimeInSeconds = 15 },
+                        new() { Exercise = squatJump, Order = 2, Sets = 4, Reps = "45s", RestTimeInSeconds = 15 },
+                        new() { Exercise = mountainClimber, Order = 3, Sets = 4, Reps = "45s", RestTimeInSeconds = 15 }
+                    }
+                },
+
+                // ===== ADDITIONAL HOME WORKOUTS =====
+                new() {
+                    Name = "Bedroom Bootcamp",
+                    Description = "Complete workout in your bedroom.",
+                    Category = "Home Workout",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 20,
+                    CaloriesBurn = 150,
+                    IsPremium = false,
+                    Rating = 4.4,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=BHeAkmrQ6W8",
+                    WorkoutPlan = planHomeBeginner,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = jumpingJacks, Order = 1, Sets = 3, Reps = "30s", RestTimeInSeconds = 30 },
+                        new() { Exercise = wallPushup, Order = 2, Sets = 3, Reps = "12", RestTimeInSeconds = 45 },
+                        new() { Exercise = chairSquat, Order = 3, Sets = 3, Reps = "15", RestTimeInSeconds = 45 },
+                        new() { Exercise = plank, Order = 4, Sets = 2, Reps = "30s", RestTimeInSeconds = 30 }
+                    }
+                },
+                new() {
+                    Name = "Living Room Muscle",
+                    Description = "Build muscle at home without equipment.",
+                    Category = "Home Workout",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 35,
+                    CaloriesBurn = 280,
+                    IsPremium = false,
+                    Rating = 4.5,
+                    ImageUrl = "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=ECJ0Cj1WbgM",
+                    WorkoutPlan = planHomeIntermediate,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = squatJump, Order = 1, Sets = 4, Reps = "15", RestTimeInSeconds = 60 },
+                        new() { Exercise = mountainClimber, Order = 2, Sets = 4, Reps = "30s", RestTimeInSeconds = 30 },
+                        new() { Exercise = burpee, Order = 3, Sets = 4, Reps = "12", RestTimeInSeconds = 45 },
+                        new() { Exercise = plank, Order = 4, Sets = 3, Reps = "45s", RestTimeInSeconds = 45 }
+                    }
+                },
+
+                // ===== ADDITIONAL QUICK 15 WORKOUTS =====
+                new() {
+                    Name = "Energy Booster",
+                    Description = "Quick burst of energy in 15 minutes.",
+                    Category = "Quick 15",
+                    Difficulty = "Beginner",
+                    DurationInMinutes = 15,
+                    CaloriesBurn = 120,
+                    IsPremium = false,
+                    Rating = 4.3,
+                    ImageUrl = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=UBMk30rjy0o",
+                    WorkoutPlan = planQuick15,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = jumpingJacks, Order = 1, Sets = 1, Reps = "2 minutes", RestTimeInSeconds = 0 },
+                        new() { Exercise = highKnees, Order = 2, Sets = 2, Reps = "30s", RestTimeInSeconds = 15 },
+                        new() { Exercise = squat, Order = 3, Sets = 2, Reps = "15", RestTimeInSeconds = 30 }
+                    }
+                },
+                new() {
+                    Name = "Lunch Break Burn",
+                    Description = "Fit a quick workout during lunch.",
+                    Category = "Quick 15",
+                    Difficulty = "Intermediate",
+                    DurationInMinutes = 15,
+                    CaloriesBurn = 150,
+                    IsPremium = false,
+                    Rating = 4.4,
+                    ImageUrl = "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800",
+                    VideoUrl = "https://www.youtube.com/watch?v=1Au6Xy4v8M4",
+                    WorkoutPlan = planQuick15,
+                    WorkoutExercises = new List<WorkoutExercise>
+                    {
+                        new() { Exercise = burpee, Order = 1, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = squatJump, Order = 2, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
+                        new() { Exercise = plank, Order = 3, Sets = 2, Reps = "45s", RestTimeInSeconds = 30 }
                     }
                 }
             };

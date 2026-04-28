@@ -1,4 +1,6 @@
-﻿namespace ProgressTrackingService.Features.LogWeight
+﻿using System.Text.Json.Serialization;
+
+namespace ProgressTrackingService.Features.LogWeight
 {
     public class WeightDto
     {
