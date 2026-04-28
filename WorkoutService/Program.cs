@@ -1,4 +1,4 @@
-﻿using Mapster;
+using Mapster;
 using MapsterMapper;
 using MediatR;
 using MassTransit;
@@ -103,7 +103,6 @@ public class Program
             builder.Services.AddMassTransit(x =>
             {
                 x.AddConsumer<WorkoutCreatedConsumer>();
-                x.AddConsumer<WorkoutSessionStartedConsumer>();
 
                 // ---------------------------------------------------------------------
                 // CRITICAL: Configure Transactional Outbox
