@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WorkoutService.Domain.Entities;
 using WorkoutService.Infrastructure.Data;
 
@@ -942,6 +942,84 @@ namespace WorkoutService.Infrastructure.Data
                     Difficulty = "Intermediate",
                     TargetMuscles = new List<string> { "Obliques", "Core" },
                     EquipmentNeeded = new List<string> { "None" }
+                },
+                // Missing Exercises for Workouts
+                new() {
+                    Name = "Incline Bench Press",
+                    Description = "Barbell bench press on an incline bench.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Chest", "Shoulders" },
+                    EquipmentNeeded = new List<string> { "Barbell", "Incline Bench" }
+                },
+                new() {
+                    Name = "Dumbbell Fly",
+                    Description = "Isolation exercise for the chest using dumbbells.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Chest" },
+                    EquipmentNeeded = new List<string> { "Dumbbells", "Bench" }
+                },
+                new() {
+                    Name = "Barbell Row",
+                    Description = "A compound back exercise using a barbell.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Back", "Lats", "Biceps" },
+                    EquipmentNeeded = new List<string> { "Barbell" }
+                },
+                new() {
+                    Name = "Seated Cable Row",
+                    Description = "Back exercise using a cable machine.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Back", "Lats", "Biceps" },
+                    EquipmentNeeded = new List<string> { "Cable Machine" }
+                },
+                new() {
+                    Name = "Leg Extension",
+                    Description = "Isolation exercise for the quadriceps.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Quads" },
+                    EquipmentNeeded = new List<string> { "Leg Extension Machine" }
+                },
+                new() {
+                    Name = "Walking Lunge",
+                    Description = "Lunge exercise performed while walking forward.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Quads", "Glutes" },
+                    EquipmentNeeded = new List<string> { "Bodyweight", "Dumbbells" }
+                },
+                new() {
+                    Name = "Leg Curl",
+                    Description = "Isolation exercise for the hamstrings.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Hamstrings" },
+                    EquipmentNeeded = new List<string> { "Leg Curl Machine" }
+                },
+                new() {
+                    Name = "Dumbbell Shoulder Press",
+                    Description = "Shoulder press performed with dumbbells.",
+                    Difficulty = "Intermediate",
+                    TargetMuscles = new List<string> { "Shoulders", "Triceps" },
+                    EquipmentNeeded = new List<string> { "Dumbbells" }
+                },
+                new() {
+                    Name = "Front Raise",
+                    Description = "Isolates the front deltoids.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Shoulders" },
+                    EquipmentNeeded = new List<string> { "Dumbbells" }
+                },
+                new() {
+                    Name = "Rear Delt Fly",
+                    Description = "Isolates the rear deltoids.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Shoulders", "Back" },
+                    EquipmentNeeded = new List<string> { "Dumbbells", "Cable Machine" }
+                },
+                new() {
+                    Name = "Dumbbell Shrug",
+                    Description = "Targets the upper trapezius muscles.",
+                    Difficulty = "Beginner",
+                    TargetMuscles = new List<string> { "Traps", "Shoulders" },
+                    EquipmentNeeded = new List<string> { "Dumbbells" }
                 }
             };
 
@@ -1065,11 +1143,11 @@ namespace WorkoutService.Infrastructure.Data
             // Safety check - ensure all required exercises exist
             if (planBeginner == null || planNormal == null || pushup == null || squat == null || plank == null) 
             {
-                Console.WriteLine("Required exercises not found. Skipping workout seeding.");
+                Console.WriteLine("[SEEDER] Essential plans or exercises missing. Skipping workout seeding.");
                 return;
             }
-            
-            Console.WriteLine($"Found exercises: pushup={pushup != null}, squat={squat != null}, plank={plank != null}");
+
+            Console.WriteLine($"[SEEDER] Found core exercises: pushup={pushup != null}, squat={squat != null}, plank={plank != null}");
 
             var workouts = new List<Workout>
             {
@@ -2003,7 +2081,7 @@ namespace WorkoutService.Infrastructure.Data
                         new() { Exercise = burpee, Order = 1, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
                         new() { Exercise = squatJump, Order = 2, Sets = 3, Reps = "15", RestTimeInSeconds = 30 },
                         new() { Exercise = plank, Order = 3, Sets = 2, Reps = "45s", RestTimeInSeconds = 30 }
-                    }
+                    }.Where(we => we.Exercise != null).ToList()
                 }
             };
 
