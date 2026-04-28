@@ -49,8 +49,15 @@ namespace WorkoutService.Infrastructure.Data
 
         private static async Task SeedWorkoutPlansAsync(ApplicationDbContext ctx)
         {
-            // Simply skip if data exists - use database management tool to reseed manually
-            if (await ctx.WorkoutPlans.AnyAsync()) return;
+            // Skip entire seeding if database already has data
+            // This avoids FK conflicts with existing data
+            if (await ctx.WorkoutPlans.AnyAsync()) 
+            {
+                Console.WriteLine("[SEEDER] Database already has data. To reseed, drop the database or clear tables manually.");
+                return;
+            }
+            
+            Console.WriteLine("[SEEDER] Starting fresh seeding...");
 
             var plans = new List<WorkoutPlan>
             {
@@ -1055,8 +1062,14 @@ namespace WorkoutService.Infrastructure.Data
             var sideLunge = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Side Lunge");
             var skaterHop = await ctx.Exercises.FirstOrDefaultAsync(e => e.Name == "Skater Hop");
 
-            // Safety check
-            if (planBeginner == null || planNormal == null || pushup == null) return;
+            // Safety check - ensure all required exercises exist
+            if (planBeginner == null || planNormal == null || pushup == null || squat == null || plank == null) 
+            {
+                Console.WriteLine("Required exercises not found. Skipping workout seeding.");
+                return;
+            }
+            
+            Console.WriteLine($"Found exercises: pushup={pushup != null}, squat={squat != null}, plank={plank != null}");
 
             var workouts = new List<Workout>
             {
