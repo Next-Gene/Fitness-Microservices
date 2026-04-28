@@ -13,36 +13,35 @@ namespace ProgressTrackingService.Data
 
             if (await ctx.WeightEntries.AnyAsync()) return;
 
-            // Seed some default users (matches IDs from IdentitySeeder if possible)
-            var userId1 = Guid.Parse("A1B2C3D4-E5F6-4A1B-8C2D-3E4F5A6B7C8D"); 
-            var userId2 = Guid.Parse("B2C3D4E5-F6A1-4B2C-9D3E-4F5A6B7C8D9E"); 
+            var adminUserId = Guid.Parse("11111111-2222-3333-4444-555555555555");
 
             var weightEntries = new List<WeightEntry>
             {
-                new() { UserId = userId1, WeightKg = 90, LoggedAt = DateTimeOffset.UtcNow.AddMonths(-3) },
-                new() { UserId = userId1, WeightKg = 88, LoggedAt = DateTimeOffset.UtcNow.AddMonths(-2) },
-                new() { UserId = userId1, WeightKg = 86, LoggedAt = DateTimeOffset.UtcNow.AddMonths(-1) },
-                new() { UserId = userId1, WeightKg = 85, LoggedAt = DateTimeOffset.UtcNow },
-
-                new() { UserId = userId2, WeightKg = 70, LoggedAt = DateTimeOffset.UtcNow.AddMonths(-2) },
-                new() { UserId = userId2, WeightKg = 71, LoggedAt = DateTimeOffset.UtcNow.AddMonths(-1) },
-                new() { UserId = userId2, WeightKg = 73, LoggedAt = DateTimeOffset.UtcNow }
+                new() { UserId = adminUserId, WeightKg = 120, LoggedAt = DateTimeOffset.UtcNow.AddMonths(-3) },
+                new() { UserId = adminUserId, WeightKg = 118, LoggedAt = DateTimeOffset.UtcNow.AddDays(-90) },
+                new() { UserId = adminUserId, WeightKg = 115, LoggedAt = DateTimeOffset.UtcNow.AddDays(-60) },
+                new() { UserId = adminUserId, WeightKg = 112, LoggedAt = DateTimeOffset.UtcNow.AddDays(-30) },
+                new() { UserId = adminUserId, WeightKg = 110, LoggedAt = DateTimeOffset.UtcNow.AddDays(-15) },
+                new() { UserId = adminUserId, WeightKg = 108, LoggedAt = DateTimeOffset.UtcNow.AddDays(-7) },
+                new() { UserId = adminUserId, WeightKg = 106, LoggedAt = DateTimeOffset.UtcNow.AddDays(-3) },
+                new() { UserId = adminUserId, WeightKg = 105, LoggedAt = DateTimeOffset.UtcNow }
             };
 
             var workoutLogs = new List<WorkoutLog>
             {
-                new() { UserId = userId1, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 45, CaloriesBurned = 400, PerformedAt = DateTimeOffset.UtcNow.AddDays(-5) },
-                new() { UserId = userId1, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 60, CaloriesBurned = 350, PerformedAt = DateTimeOffset.UtcNow.AddDays(-3) },
-                new() { UserId = userId1, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 30, CaloriesBurned = 150, PerformedAt = DateTimeOffset.UtcNow.AddDays(-1) },
-
-                new() { UserId = userId2, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 75, CaloriesBurned = 500, PerformedAt = DateTimeOffset.UtcNow.AddDays(-4) },
-                new() { UserId = userId2, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 60, CaloriesBurned = 300, PerformedAt = DateTimeOffset.UtcNow.AddDays(-2) }
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 30, CaloriesBurned = 250, PerformedAt = DateTimeOffset.UtcNow.AddDays(-15), Rating = 4 },
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 45, CaloriesBurned = 350, PerformedAt = DateTimeOffset.UtcNow.AddDays(-13), Rating = 5 },
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 40, CaloriesBurned = 300, PerformedAt = DateTimeOffset.UtcNow.AddDays(-10), Rating = 4 },
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 50, CaloriesBurned = 400, PerformedAt = DateTimeOffset.UtcNow.AddDays(-8), Rating = 5 },
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 35, CaloriesBurned = 280, PerformedAt = DateTimeOffset.UtcNow.AddDays(-6), Rating = 4 },
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 60, CaloriesBurned = 450, PerformedAt = DateTimeOffset.UtcNow.AddDays(-4), Rating = 5 },
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 45, CaloriesBurned = 350, PerformedAt = DateTimeOffset.UtcNow.AddDays(-2), Rating = 4 },
+                new() { UserId = adminUserId, WorkoutId = Guid.NewGuid(), SessionId = Guid.NewGuid(), DurationMinutes = 55, CaloriesBurned = 420, PerformedAt = DateTimeOffset.UtcNow.AddDays(-1), Rating = 5 }
             };
 
             var statistics = new List<UserStatistics>
             {
-                new() { UserId = userId1, TotalWorkouts = 3, TotalCaloriesBurned = 900, CurrentWeight = 85, StartingWeight = 90, LastWorkoutAt = DateTimeOffset.UtcNow.AddDays(-1) },
-                new() { UserId = userId2, TotalWorkouts = 2, TotalCaloriesBurned = 800, CurrentWeight = 73, StartingWeight = 70, LastWorkoutAt = DateTimeOffset.UtcNow.AddDays(-2) }
+                new() { UserId = adminUserId, TotalWorkouts = 8, TotalCaloriesBurned = 2800, CurrentWeight = 105, StartingWeight = 120, LastWorkoutAt = DateTimeOffset.UtcNow.AddDays(-1), CurrentStreak = 3, LongestStreak = 5 }
             };
 
             await ctx.WeightEntries.AddRangeAsync(weightEntries);

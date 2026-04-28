@@ -20,15 +20,17 @@ namespace AuthenticationService.Data.Seed
             // Seed Admin
             var adminEmail = "seifmoataz27249@gmail.com";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            var adminUserId = Guid.Parse("11111111-2222-3333-4444-555555555555");
 
             if (adminUser == null)
             {
                 var user = new ApplicationUser
                 {
+                    Id = adminUserId,
                     UserName = "SeifAdmin",
                     Email = adminEmail,
-                    FirstName = "System",
-                    LastName = "Admin",
+                    FirstName = "Seif",
+                    LastName = "Moataz",
                     ActivtyLevel = "Medium",
                     Goal = "Lose Weight",
                     Age = 21,
