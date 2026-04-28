@@ -1,0 +1,637 @@
+{
+  "info": {
+    "name": "Fitness Microservices API Gateway",
+    "description": "Postman collection containing all APIs and their payloads for the Fitness Microservices system.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8088"
+    },
+    {
+      "key": "token",
+      "value": "YOUR_BEARER_TOKEN"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Ahmed\",\n  \"lastName\": \"Ali\",\n  \"email\": \"ahmed@example.com\",\n  \"password\": \"P@ssw0rd123\",\n  \"phoneNumber\": \"01012345678\",\n  \"height\": 175,\n  \"weight\": 80,\n  \"age\": 25,\n  \"gender\": \"Male\",\n  \"activtyLevel\": \"Moderate\",\n  \"goal\": \"LoseWeight\",\n  \"rememberMe\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmed@example.com\",\n  \"password\": \"P@ssw0rd123\",\n  \"rememberMe\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Forget Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmed@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/forget-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "forget-password"]
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmed@example.com\",\n  \"otpCode\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/verify-otp",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "verify-otp"]
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmed@example.com\",\n  \"newPassword\": \"NewP@ssw0rd123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/reset-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "reset-password"]
+            }
+          }
+        },
+        {
+          "name": "Get User Info",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/user-info",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "user-info"]
+            }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"P@ssw0rd123\",\n  \"newPassword\": \"NewP@ssw0rd123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/change-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "change-password"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "FirstName", "value": "Ahmed", "type": "text" },
+                { "key": "LastName", "value": "Ali", "type": "text" },
+                { "key": "PhoneNumber", "value": "01012345678", "type": "text" },
+                { "key": "Goal", "value": "LoseWeight", "type": "text" },
+                { "key": "activtyLevel", "value": "Moderate", "type": "text" },
+                { "key": "Weight", "value": "78.5", "type": "text" },
+                { "key": "Height", "value": "175", "type": "text" },
+                { "key": "ProfileImage", "type": "file", "src": [] }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/update-profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "update-profile"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workouts",
+      "item": [
+        {
+          "name": "Get All Workouts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/workouts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workouts"]
+            }
+          }
+        },
+        {
+          "name": "Get Workout By Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/workouts/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workouts", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Workouts By Category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/workouts/category/Cardio",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workouts", "category", "Cardio"]
+            }
+          }
+        },
+        {
+          "name": "Start Workout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"difficulty\": \"Medium\",\n  \"plannedDuration\": 60\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/workouts/1/start",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workouts", "1", "start"]
+            }
+          }
+        },
+        {
+          "name": "Create Workout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Full Body Workout\",\n  \"description\": \"Intense full body workout\",\n  \"caloriesBurn\": 500,\n  \"isPremium\": false,\n  \"rating\": 4.5,\n  \"durationInMinutes\": 60,\n  \"difficulty\": \"Hard\",\n  \"category\": \"Strength\",\n  \"workoutPlanId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/workouts/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workouts", "create"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workout Plans",
+      "item": [
+        {
+          "name": "Get All Workout Plans",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/workout-plans",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workout-plans"]
+            }
+          }
+        },
+        {
+          "name": "Get Workout Plan By Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/workout-plans/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workout-plans", "1"]
+            }
+          }
+        },
+        {
+          "name": "Assign Plan To Workout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/workout-plans/1/assign-to/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "workout-plans", "1", "assign-to", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nutrition",
+      "item": [
+        {
+          "name": "Get Recommendations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/nutrition/recommendations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "nutrition", "recommendations"]
+            }
+          }
+        },
+        {
+          "name": "Get Meal Details",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/nutrition/meals/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "nutrition", "meals", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Progress Tracking",
+      "item": [
+        {
+          "name": "Get Progress",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/progress?userId=3fa85f64-5717-4562-b3fc-2c963f66afa6&period=weekly",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "progress"],
+              "query": [
+                { "key": "userId", "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6" },
+                { "key": "period", "value": "weekly" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Log Workout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"sessionId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"workoutId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"durationMinutes\": 60,\n  \"caloriesBurned\": 500,\n  \"rating\": 5,\n  \"performedAt\": \"2023-10-10T12:00:00Z\",\n  \"clientRequestId\": \"req-1234\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/progress/workouts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "progress", "workouts"]
+            }
+          }
+        },
+        {
+          "name": "Log Weight",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"weightKg\": 75.5,\n  \"loggedAt\": \"2023-10-10T12:00:00Z\",\n  \"clientRequestId\": \"req-1234\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/progress/weight",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "progress", "weight"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fitness Calculator",
+      "item": [
+        {
+          "name": "Calculate Fitness",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"age\": 25,\n  \"gender\": \"M\",\n  \"weight\": 80.5,\n  \"height\": 180.0,\n  \"activityLevel\": 3,\n  \"goal\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/fitness-calculator",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "fitness-calculator"]
+            }
+          }
+        },
+        {
+          "name": "Update Fitness",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"age\": 25,\n  \"gender\": \"M\",\n  \"weight\": 80.5,\n  \"height\": 180.0,\n  \"activityLevel\": 3,\n  \"goal\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/fitness-calculator/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "fitness-calculator", "3fa85f64-5717-4562-b3fc-2c963f66afa6"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Smart Coach",
+      "item": [
+        {
+          "name": "Ask Coach",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"What exercises should I do to lose belly fat?\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/smart-coach",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "smart-coach"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
