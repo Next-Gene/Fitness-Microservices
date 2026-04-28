@@ -14,6 +14,7 @@ using Online_Exam_System.Repositories;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.FileProviders;
 using AuthenticationService.Features.Auth.Register;
 using AuthenticationService.Features.Auth.Login; // Adjust namespaces as needed
 
@@ -146,8 +147,18 @@ namespace AuthenticationService
             }
 
             // app.UseHttpsRedirection(); // Disabled: no HTTPS cert in Docker
-            
-            app.UseStaticFiles(); // Enable serving uploaded images
+
+            // Serve uploaded user images from the configured upload directory
+            // Files are saved to UPLOAD_PATH/Images/<subFolder>/<filename>
+            // and exposed at /Uploads/Images/<subFolder>/<filename>
+            var uploadBasePath = Environment.GetEnvironmentVariable("UPLOAD_PATH") ?? "/app/uploads";
+            Directory.CreateDirectory(uploadBasePath); // ensure the directory exists
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(uploadBasePath),
+                RequestPath = "/Uploads"
+            });
+
             app.UseCors("AllowAll"); // CORS first
             
             app.UseAuthentication();
