@@ -22,7 +22,7 @@ namespace ProgressTrackingService.Data
             {
                 weightEntries.Add(new WeightEntry { 
                     UserId = adminUserId, 
-                    WeightKg = 120 - (90 - i) * 0.16f, // Smooth decline from 120 to ~105
+                    WeightKg = 120m - (decimal)(90 - i) * 0.16m, // Smooth decline from 120 to ~105
                     LoggedAt = now.AddDays(-i) 
                 });
             }
@@ -52,8 +52,8 @@ namespace ProgressTrackingService.Data
                     UserId = adminUserId, 
                     TotalWorkouts = workoutLogs.Count, 
                     TotalCaloriesBurned = workoutLogs.Sum(l => l.CaloriesBurned), 
-                    CurrentWeight = 105.6f, 
-                    StartingWeight = 120, 
+                    CurrentWeight = 105.6m, 
+                    StartingWeight = 120m, 
                     LastWorkoutAt = now.AddDays(-1), 
                     CurrentStreak = 4, 
                     LongestStreak = 7 
