@@ -14,14 +14,20 @@ namespace AuthenticationService.Services
             _env = env;
             _httpContextAccessor = httpContextAccessor;
         }
+
+        private string GetUploadBasePath()
+        {
+            return Environment.GetEnvironmentVariable("UPLOAD_PATH") ?? @"D:\Fitness\user_data\uploads";
+        }
+
         public bool DeleteImage(string relativePath)
         {
             if (string.IsNullOrWhiteSpace(relativePath))
                 return false;
 
-            var webRootPath = _env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var uploadBasePath = GetUploadBasePath();
             relativePath = relativePath.Replace("\\", "/").TrimStart('/');
-            var fullPath = Path.Combine(webRootPath, relativePath);
+            var fullPath = Path.Combine(uploadBasePath, relativePath);
 
             if (File.Exists(fullPath))
             {
@@ -37,18 +43,11 @@ namespace AuthenticationService.Services
             if (string.IsNullOrWhiteSpace(relativePath))
                 return null;
 
-          
             if (Uri.IsWellFormedUriString(relativePath, UriKind.Absolute))
                 return relativePath;
 
             relativePath = relativePath.Replace("\\", "/").TrimStart('/');
-
-            var request = _httpContextAccessor.HttpContext?.Request;
-            if (request == null)
-                return "/" + relativePath;             
-
-            // Always point to the API Gateway for external access
-            var baseUrl = $"http://localhost:8088";
+            var baseUrl = "http://localhost:8088";
             return $"{baseUrl}/{relativePath}";
         }
 
@@ -60,11 +59,10 @@ namespace AuthenticationService.Services
             var fileExtension = Path.GetExtension(imageFile.FileName);
             var fileName = $"{Guid.NewGuid()}{fileExtension}";
 
-            
-            var webRootPath = _env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            var folderPath = Path.Combine(webRootPath, "Uploads", "Images", subFolder);
+            var uploadBasePath = GetUploadBasePath();
+            var folderPath = Path.Combine(uploadBasePath, "Images", subFolder);
 
-            Directory.CreateDirectory(folderPath); 
+            Directory.CreateDirectory(folderPath);
 
             var filePath = Path.Combine(folderPath, fileName);
 
@@ -73,7 +71,6 @@ namespace AuthenticationService.Services
                 await imageFile.CopyToAsync(stream);
             }
 
-           
             return Path.Combine("Uploads", "Images", subFolder, fileName).Replace("\\", "/");
         }
     }

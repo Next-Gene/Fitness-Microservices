@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
 using Ocelot.Middleware;
 using System.Net; // Required for SSL options
 using System.Text;
@@ -71,6 +73,25 @@ var app = builder.Build();
 
 // 4. Configure Middleware Pipeline
 // app.UseHttpsRedirection(); // Disabled: no HTTPS cert in Docker
+
+// Serve uploaded images from external storage
+var uploadPath = @"D:\Fitness\user_data\uploads";
+if (!Directory.Exists(uploadPath))
+{
+    uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "Fitness", "user_data", "uploads");
+}
+if (Directory.Exists(uploadPath))
+{
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(uploadPath),
+        RequestPath = new PathString("/Uploads")
+    });
+}
+else
+{
+    app.UseStaticFiles(); // Fallback to default wwwroot
+}
 
 app.UseCors("AllowAngular");
 app.UseAuthentication();
