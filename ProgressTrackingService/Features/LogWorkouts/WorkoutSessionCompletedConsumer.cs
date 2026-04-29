@@ -32,7 +32,7 @@ namespace ProgressTrackingService.Features.Workouts.Consumers
             var command = new LogWorkoutCommand(
                 UserId: context.Message.UserId,
                 SessionId: sessionIdGuid,
-                WorkoutId: context.Message.WorkoutId,
+                WorkoutId: null, // WorkoutId from WorkoutService is an int, but ProgressTracking expects Guid
                 DurationMinutes: context.Message.DurationMinutes,
                 CaloriesBurned: context.Message.TotalCaloriesBurned,
                 Rating: 0, 
