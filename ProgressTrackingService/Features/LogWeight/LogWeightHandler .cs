@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
@@ -73,7 +73,7 @@ namespace ProgressTrackingService.Features.LogWeight
                 newWeight = req.WeightKg
             };
 
-            await client.PostAsJsonAsync("/api/v1/workout/recalculate", payload, ct);
+            // await client.PostAsJsonAsync("/api/v1/workout/recalculate", payload, ct); // Note: This endpoint does not currently exist in WorkoutService
 
             // ------------ MEMORY CACHE INVALIDATION ------------
             _cache.Remove($"progress_dashboard_{req.UserId}");

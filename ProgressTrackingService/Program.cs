@@ -23,7 +23,12 @@ namespace ProgressTrackingService
 
             // MemoryCache
             builder.Services.AddMemoryCache();
-            builder.Services.AddHttpClient();
+            // HttpClient Configurations
+            builder.Services.AddHttpClient("workout-service", client =>
+            {
+                var workoutServiceUrl = builder.Configuration["Services:WorkoutService"] ?? "http://workoutservice:8080";
+                client.BaseAddress = new Uri(workoutServiceUrl);
+            });
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
