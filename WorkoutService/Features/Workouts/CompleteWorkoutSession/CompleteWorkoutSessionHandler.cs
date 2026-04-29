@@ -56,7 +56,6 @@ namespace WorkoutService.Features.Workouts.CompleteWorkoutSession
             session.EndedAt = DateTime.UtcNow;
 
             _sessionRepository.Update(session);
-            await _unitOfWork.SaveChangesAsync();
 
             await _publishEndpoint.Publish<IWorkoutSessionCompleted>(new
             {
@@ -67,6 +66,8 @@ namespace WorkoutService.Features.Workouts.CompleteWorkoutSession
                 TotalCaloriesBurned = request.CaloriesBurned,
                 CompletedAt = session.EndedAt.Value
             }, cancellationToken);
+
+            await _unitOfWork.SaveChangesAsync();
 
             return RequestResponse<string>.Success(session.Id.ToString(), "Workout session completed successfully.");
         }
