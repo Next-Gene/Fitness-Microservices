@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using ProgressTrackingService.Data;
@@ -84,8 +84,11 @@ namespace ProgressTrackingService.Features.LogWorkout
             await tx.CommitAsync(ct);
 
             // Cache invalidation for user's dashboard
-            var cacheKey = $"progress_dashboard_{req.UserId}";
-            _memoryCache.Remove(cacheKey); // if using distributed cache, remove key there
+            _memoryCache.Remove($"progress_dashboard_{req.UserId}_weekly"); 
+            _memoryCache.Remove($"progress_dashboard_{req.UserId}_monthly"); 
+            _memoryCache.Remove($"progress_dashboard_{req.UserId}_yearly"); 
+            _memoryCache.Remove($"progress_dashboard_{req.UserId}_all"); 
+            _memoryCache.Remove($"progress_dashboard_{req.UserId}_"); // just in case period is empty
 
             // Achievements: you can fire internal domain events or call achievements service
             // return dto
