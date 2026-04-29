@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using ProgressTrackingService.Data;
@@ -72,7 +72,8 @@ namespace ProgressTrackingService.Features.Progress
                     Id = r.Id,
                     DurationMinutes = r.DurationMinutes,
                     CaloriesBurned = r.CaloriesBurned,
-                    PerformedAt = r.PerformedAt
+                    PerformedAt = r.PerformedAt,
+                    WorkoutId = r.WorkoutId.HasValue ? BitConverter.ToInt32(r.WorkoutId.Value.ToByteArray(), 0) : 0
                 }).ToList(),
 
                 new List<object>() // achievements stub

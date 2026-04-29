@@ -39,7 +39,7 @@ namespace ProgressTrackingService.Features.Workouts.Consumers
             var command = new LogWorkoutCommand(
                 UserId: context.Message.UserId,
                 SessionId: sessionIdGuid,
-                WorkoutId: null, // WorkoutId from WorkoutService is an int, but ProgressTracking expects Guid
+                WorkoutId: GetDeterministicGuid(context.Message.WorkoutId),
                 DurationMinutes: context.Message.DurationMinutes,
                 CaloriesBurned: context.Message.TotalCaloriesBurned,
                 Rating: 0, 
@@ -48,6 +48,13 @@ namespace ProgressTrackingService.Features.Workouts.Consumers
             );
 
             await _sender.Send(command);
+        }
+
+        private static Guid GetDeterministicGuid(int value)
+        {
+            byte[] bytes = new byte[16];
+            BitConverter.GetBytes(value).CopyTo(bytes, 0);
+            return new Guid(bytes);
         }
     }
 }
