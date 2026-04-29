@@ -1,0 +1,46 @@
+using MassTransit;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using ProgressTrackingService.Features.LogWorkout;
+using WorkoutService.Contracts;
+using System;
+using System.Threading.Tasks;
+
+namespace ProgressTrackingService.Features.Workouts.Consumers
+{
+    public class WorkoutSessionCompletedConsumer : IConsumer<IWorkoutSessionCompleted>
+    {
+        private readonly ISender _sender;
+        private readonly ILogger<WorkoutSessionCompletedConsumer> _logger;
+
+        public WorkoutSessionCompletedConsumer(ISender sender, ILogger<WorkoutSessionCompletedConsumer> logger)
+        {
+            _sender = sender;
+            _logger = logger;
+        }
+
+        public async Task Consume(ConsumeContext<IWorkoutSessionCompleted> context)
+        {
+            _logger.LogInformation("Received WorkoutSessionCompleted for SessionId: {SessionId}", context.Message.SessionId);
+
+            if (!Guid.TryParse(context.Message.SessionId, out var sessionIdGuid))
+            {
+                _logger.LogWarning("Invalid SessionId format: {SessionId}", context.Message.SessionId);
+                return;
+            }
+
+            var command = new LogWorkoutCommand(
+                UserId: context.Message.UserId,
+                SessionId: sessionIdGuid,
+                WorkoutId: context.Message.WorkoutId,
+                DurationMinutes: context.Message.DurationMinutes,
+                CaloriesBurned: context.Message.TotalCaloriesBurned,
+                Rating: 0, 
+                PerformedAt: context.Message.CompletedAt,
+                ClientRequestId: $"Event-{context.Message.SessionId}"
+            );
+
+            await _sender.Send(command);
+        }
+    }
+}

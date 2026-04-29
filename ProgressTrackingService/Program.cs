@@ -3,6 +3,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProgressTrackingService.Api;
 using ProgressTrackingService.Data;
+using MassTransit;
+using ProgressTrackingService.Features.Workouts.Consumers;
 
 namespace ProgressTrackingService
 {
@@ -26,6 +28,24 @@ namespace ProgressTrackingService
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // MassTransit Configuration
+            builder.Services.AddMassTransit(x =>
+            {
+                x.AddConsumer<WorkoutSessionCompletedConsumer>();
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    var rabbitMqHost = builder.Configuration["RabbitMq:Host"] ?? "localhost";
+                    cfg.Host(rabbitMqHost, "/", h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+
+                    cfg.ConfigureEndpoints(context);
+                });
+            });
 
             var app = builder.Build();
 
