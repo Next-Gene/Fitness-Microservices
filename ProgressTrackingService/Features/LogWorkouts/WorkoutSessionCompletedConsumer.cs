@@ -23,7 +23,14 @@ namespace ProgressTrackingService.Features.Workouts.Consumers
         {
             _logger.LogInformation("Received WorkoutSessionCompleted for SessionId: {SessionId}", context.Message.SessionId);
 
-            if (!Guid.TryParse(context.Message.SessionId, out var sessionIdGuid))
+            Guid sessionIdGuid;
+            if (int.TryParse(context.Message.SessionId, out var sessionIdInt))
+            {
+                byte[] bytes = new byte[16];
+                BitConverter.GetBytes(sessionIdInt).CopyTo(bytes, 0);
+                sessionIdGuid = new Guid(bytes);
+            }
+            else if (!Guid.TryParse(context.Message.SessionId, out sessionIdGuid))
             {
                 _logger.LogWarning("Invalid SessionId format: {SessionId}", context.Message.SessionId);
                 return;
